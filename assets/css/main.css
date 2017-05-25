@@ -6416,7 +6416,8 @@ button.close {
       text-decoration: none;
       top: 22px; }
     .section-questions-market-place .questions-form textarea {
-      font-size: 0.9em; }
+      font-size: 0.9em;
+      margin-bottom: 10px}
   .section-questions-market-place .question-shipping-link {
     color: gray;
     position: relative;
