@@ -34,7 +34,7 @@ def product_new(request):
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
             product.status = form.cleaned_data['status']
-            categories = Category.objects.filter(pk__in=request.POST.getlist('categories'))
+            categories = Category.objects.filter(id__in=request.POST.getlist('categories'))
             if categories:
                 product.categories = categories
     
@@ -65,7 +65,7 @@ def product_edit(request, product_id):
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
             product.status = form.cleaned_data['status']
-            categories = Category.objects.filter(pk__in=request.POST.getlist('categories'))
+            categories = Category.objects.filter(id__in=request.POST.getlist('categories'))
             if categories:
                 product.categories = categories
     
