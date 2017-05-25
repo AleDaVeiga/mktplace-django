@@ -19,8 +19,8 @@ def my_ads(request):
     return render(request, 'portal/my_ads.html', context)
 
 
-def product_show(request, id):
-    product = get_object_or_404(Product, pk=id, status='Active')
+def product_show(request, slug):
+    product = get_object_or_404(Product, slug=slug, status='Active')
 
     context = {
         'product': product

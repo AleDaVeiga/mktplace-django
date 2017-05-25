@@ -21,13 +21,11 @@
             <div class="container">
                 <div class="vip-market-place-container">
                     <ol class="breadcrumb">
-                        <a href="" title="" >Voltar para a lista</a>
+                        <a href="{% url 'my_ads' %}" title="Voltar para a lista" >Voltar para a lista</a>
                         <span class="vip-market-place-mobile-none">|</span>
+                        {{ product.categories.name }}
                         <li><a href="" title="">Informática</a></li>
                         <li><a href="" title="">Acessórios para Notebook</a></li>
-                        <li><a href="" title="">Telas LCD</a></li>
-                        <li><a href="" title="">15.6"</a></li>
-                        <li><a href="" title="">Dell</a></li>
                     </ol>
 
                     <div class="navbar-right vip-navigation-market-place">
