@@ -14,31 +14,31 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.name.errors }}</span>
 
                         <div class="form-group">
                             <label for="">{{ form.name.label }}</label>
-                            <input type="text" class="form-control" name="name" value="{{ product.name }}">
+                            <input type="text" class="form-control" name="name" value="{{ product.name }}" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-3">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.quantity.errors }}</span>
 
                         <div class="form-group">
                             <label for="">{{ form.quantity.label }}</label>
-                            <input type="number" class="form-control" name="quantity" value="{{ product.quantity }}">
+                            <input type="number" class="form-control" name="quantity" value="{{ product.quantity }}" required="required">
                         </div>
                     </div>
 
                     <div class="col-md-3">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.price.errors }}</span>
 
                         <div class="form-group">
                             <label for="">{{ form.price.label }}</label>
-                            <input type="text" class="form-control" name="price" value="{{ product.price }}">
+                            <input type="text" class="form-control" name="price" value="{{ product.price }}" required="required">
                         </div>
                     </div>
 
@@ -48,11 +48,11 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.short_description.errors }}</span>
 
                         <div class="form-group">
                             <label for="">{{ form.short_description.label }}</label>
-                            <input type="text" class="form-control" name="short_description" value="{{ product.short_description }}">
+                            <input type="text" class="form-control" name="short_description" value="{{ product.short_description }}" required="required">
                         </div>
                     </div>
                 </div>
@@ -60,11 +60,11 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.description.errors }}</span>
 
                         <div class="form-group">
                             <label for="">{{ form.description.label }}</label>
-                            <textarea class="form-control" rows="10" name="description">{{ product.description }}</textarea>
+                            <textarea class="form-control" rows="10" name="description" required="required">{{ product.description }}</textarea>
                         </div>
 
                     </div>
@@ -73,13 +73,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Categorias</label>
-                            <select multiple name="categories" class="form-control">
-                                {% for category in categories %}
-                                    <option value="{{ category.id }}">{{ category.name }}</option>
-                                {% endfor %}
-                            </select>
-
+                            <label>{{ form.categories.label }}</label>
+                            {{ form.categories }}
                         </div>
                     </div>
 

@@ -1,4 +1,5 @@
 from django import forms
+from portal.models import Category
 
 
 class ProductForm(forms.Form):
@@ -27,6 +28,12 @@ class ProductForm(forms.Form):
     description = forms.CharField(label='Descrição',
                                   widget=forms.Textarea(attrs={'class': 'form-control'})
                                   )
+
+    choices = [(cat.id, str(cat)) for cat in Category.objects.all()]
+    categories = forms.MultipleChoiceField(label='Categorias',
+                                           widget=forms.SelectMultiple(attrs={'class': 'form-control'}),
+                                           choices=choices
+                                           )
 
     status = forms.CharField(label='Status',
                              widget=forms.Textarea(attrs={'class': 'form-control'})

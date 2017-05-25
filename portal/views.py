@@ -43,11 +43,13 @@ def product_new(request):
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
             product.status = form.cleaned_data['status']
+            product.save()
+            
             categories = Category.objects.filter(id__in=request.POST.getlist('categories'))
             if categories:
-                product.categories = categories
-    
-            product.save()
+                for category in categories:
+                    product.categories.add(category)
+                
             return redirect('my_ads')
     
     context = {

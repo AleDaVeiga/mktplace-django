@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-6">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.name.errors }}</span>
 
                         <div class="form-group">
                             <label>{{ form.name.label }}</label>
@@ -24,7 +24,7 @@
 
                     <div class="col-md-3">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.quantity.errors }}</span>
 
                         <div class="form-group">
                             <label>{{ form.quantity.label }}</label>
@@ -34,7 +34,7 @@
 
                     <div class="col-md-3">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.price.errors }}</span>
 
                         <div class="form-group">
                             <label>{{ form.price.label }}</label>
@@ -48,7 +48,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.short_description.errors }}</span>
 
                         <div class="form-group">
                             <label>{{ form.short_description.label }}</label>
@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-md-12">
 
-                        <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.description.errors }}</span>
 
                         <div class="form-group">
                             <label>{{ form.description.label }}</label>
@@ -72,13 +72,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Categorias</label>
-                            <select multiple name="category" class="form-control">
-                                {% for category in categories %}
-                                    <option value="{{ category.id }}">{{ category.name }}</option>
-                                {% endfor %}
-                            </select>
-
+                            <label>{{ form.categories.label }}</label>
+                            {{ form.categories }}
                         </div>
                     </div>
 

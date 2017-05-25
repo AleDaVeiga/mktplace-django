@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from django.db import models
 
 
@@ -30,6 +31,14 @@ class Product(models.Model):
         ('Inactive', 'Inactive'),
     )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Inactive")
+
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None
+        if is_new:
+            super(Product, self).save()
+            self.slug = '%s' % (slugify(self.name))
+
+        super(Product, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = "Products"
