@@ -15,8 +15,7 @@
                 <span class="text-danger">{{ form.subject.errors }}</span>
 
                 <div class="form-group">
-                    <label for="">{{ form.name.label }}</label>
-{#                    <input type="text" class="form-control" id="">#}
+                    <label>{{ form.name.label }}</label>
                     {{ form.name }}
                 </div>
             </div>
@@ -26,8 +25,7 @@
                 <span class="text-danger">{{ form.subject.errors }}</span>
 
                 <div class="form-group">
-                    <label for="">{{ form.quantity.label }}</label>
-{#                    <input type="number" class="form-control" name="quantity">#}
+                    <label>{{ form.quantity.label }}</label>
                     {{ form.quantity }}
                 </div>
             </div>
@@ -37,8 +35,7 @@
                 <span class="text-danger">{{ form.subject.errors }}</span>
 
                 <div class="form-group">
-                    <label for="">{{ form.price.label }}</label>
-{#                    <input type="text" class="form-control" name="price">#}
+                    <label>{{ form.price.label }}</label>
                     {{ form.price }}
                 </div>
             </div>
@@ -52,9 +49,8 @@
                 <span class="text-danger">{{ form.subject.errors }}</span>
 
                 <div class="form-group">
-                    <label for="">{{ form.short_description }}</label>
-{#                    <input type="text" class="form-control" name="short_description">#}
-                    {{ form.short_description.label }}
+                    <label>{{ form.short_description.label }}</label>
+                    {{ form.short_description }}
                 </div>
             </div>
         </div>
@@ -65,11 +61,8 @@
                 <span class="text-danger">{{ form.subject.errors }}</span>
 
                 <div class="form-group">
-                    <label for="">{{ form.description.labe }}</label>
-{#                    <textarea class="form-control" rows="10" name="description">{{ product.description }}</textarea>#}
+                    <label>{{ form.description.label }}</label>
                     {{ form.description }}
-{#                    {{ form.description.label }}#}
-
                 </div>
             </div>
         </div>
@@ -77,7 +70,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="">{{ form.categories.label }}</label>
+                    <label>{{ form.categories.label }}</label>
                     <select multiple name="category" class="form-control">
                         {% for category in categories %}
                             <option value="{{ category.id }}">{{ category.name }}</option>
