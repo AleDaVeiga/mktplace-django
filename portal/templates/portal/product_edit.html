@@ -71,11 +71,26 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="">{{ form.categories.label }}</label>
+                    <label>Categorias</label>
                     <select multiple name="category" class="form-control">
                         {% for category in categories %}
                             <option value="{{ category.id }}">{{ category.name }}</option>
                         {% endfor %}
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>{{ form.status.label }}</label>
+                    <select name="status" class="form-control">
+                        <option value="{{ product.status }}">{{ product.status }}</option>
+                        {% if product.status == 'Active' %}
+                            <option value="Inactive">Inactive</option>
+                        {% else %}
+                            <option value="Active">Active</option>
+                        {% endif %}
                     </select>
 
                 </div>

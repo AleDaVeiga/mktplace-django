@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from portal.models import Product, Category
 from portal.form import ProductForm
 
+import logging
+
 
 def home(request):
     return render(request, 'portal/home.html', {})
@@ -31,7 +33,7 @@ def product_new(request):
             product.price = form.cleaned_data['price']
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
-            product.status = 'Active'
+            product.status = form.cleaned_data['status']
             categories = Category.objects.filter(pk__in=request.POST.getlist('categories'))
             if categories:
                 product.categories = categories
@@ -62,7 +64,7 @@ def product_edit(request, product_id):
             product.price = form.cleaned_data['price']
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
-            product.status = 'Active'
+            product.status = form.cleaned_data['status']
             categories = Category.objects.filter(pk__in=request.POST.getlist('categories'))
             if categories:
                 product.categories = categories
@@ -77,14 +79,3 @@ def product_edit(request, product_id):
     }
 
     return render(request, 'portal/product_edit.html', context)
-
-
-def product_delete(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-
-    try:
-        product.delete()
-    except Exception as e:
-        return e
-    
-    return redirect('my_ads')

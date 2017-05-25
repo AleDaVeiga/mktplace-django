@@ -12,7 +12,7 @@
             <th>Código</th>
             <th>Título</th>
             <th>Status</th>
-            <th colspan="2">Ação</th>
+            <th>Ação</th>
         </tr>
         {% for product in products %}
             <tr>
@@ -20,7 +20,6 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.status }}</td>
                 <td><a href="{% url 'product_edit' product.id %}" title="Editar">Editar</a></td>
-                <td><a href="{% url 'product_delete' product.id %}" title="Editar">Deletar</a></td>
             </tr>
         {% endfor %}
     </table>

@@ -27,3 +27,7 @@ class ProductForm(forms.Form):
     description = forms.CharField(label='Descrição',
                                   widget=forms.Textarea(attrs={'class': 'form-control'})
                                   )
+
+    status = forms.CharField(label='Status',
+                             widget=forms.Textarea(attrs={'class': 'form-control'})
+                             )
