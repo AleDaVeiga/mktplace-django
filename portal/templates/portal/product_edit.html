@@ -6,4 +6,84 @@
     <h3>Editando: {{ product.name }}</h3>
     <br>
 
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+
+                <span class="text-danger">{{ form.subject.errors }}</span>
+
+                <div class="form-group">
+                    <label for="">{{ form.name.label }}</label>
+                    <input type="text" class="form-control" value="{{ product.name }}">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+
+                <span class="text-danger">{{ form.subject.errors }}</span>
+
+                <div class="form-group">
+                    <label for="">{{ form.quantity.label }}</label>
+                    <input type="number" class="form-control" name="quantity" value="{{ product.quantity }}">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+
+                <span class="text-danger">{{ form.subject.errors }}</span>
+
+                <div class="form-group">
+                    <label for="">{{ form.price.label }}</label>
+                    <input type="text" class="form-control" name="price" value="{{ product.price }}">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <span class="text-danger">{{ form.subject.errors }}</span>
+
+                <div class="form-group">
+                    <label for="">{{ form.short_description.label }}</label>
+                    <input type="text" class="form-control" name="short_description" value="{{ product.short_description }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <span class="text-danger">{{ form.subject.errors }}</span>
+
+                <div class="form-group">
+                    <label for="">{{ form.description.label }}</label>
+                    <textarea class="form-control" rows="10" name="description">{{ product.description }}</textarea>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">{{ form.categories.label }}</label>
+                    <select name="category" class="form-control" required="required">
+                        {% for category in product.categories.all %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-info">Editar</button>
+    </form>
+
+
 {% endblock %}

@@ -5986,6 +5986,10 @@ button.close {
 .page-market-place .form-control {
   height: 40px; }
 
+.page-market-place textarea.form-control {
+   min-height: 150px;
+ }
+
 .page-market-place .btn {
   padding: 9px 12px; }
 
