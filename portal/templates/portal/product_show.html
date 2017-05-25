@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}Meus anuncios - Market Place{% endblock %}
 
@@ -23,15 +24,16 @@
                     <ol class="breadcrumb">
                         <a href="{% url 'my_ads' %}" title="Voltar para a lista" >Voltar para a lista</a>
                         <span class="vip-market-place-mobile-none">|</span>
-                        {{ product.categories.name }}
-                        <li><a href="" title="">Informática</a></li>
-                        <li><a href="" title="">Acessórios para Notebook</a></li>
+                        {% for category in product.categories.all %}
+                            <li><a href="" title="">{{ category.name }}</a></li>
+                        {% endfor %}
+                        <li><a href="" title="">{{ product.name }}</a></li>
                     </ol>
 
                     <div class="navbar-right vip-navigation-market-place">
                         <p>
                         <span class="vip-market-place-mobile-none">
-                            Anúncio #723704914
+                            Anúncio #{{ product.id }}
                             <a href="" title="">Faça uma denúncia</a></li> |
                         </span>
                             <a href="" title="">Vender um igual</a>
@@ -45,13 +47,11 @@
         <section class="section-header-market-place">
             <div class="container">
                 <header>
-                    <h1>
-                        Tela 15.6 N156b6-l0b Acer Samsung Dell Hp Gateway Universal
-                    </h1>
+                    <h1>{{ product.name }}</h1>
 
                     <p class="header-info-market-place">
                         <i class="fa fa-tag"></i> Novo
-                        <i class="fa fa-cart-plus"></i>31 vendidos
+                        <i class="fa fa-cart-plus"></i>{{ product.quantity }} quantidade
                     </p>
                 </header>
 
@@ -61,18 +61,18 @@
 
                         <div class="col-md-2 img-market-place-thumbnail">
 
-                            <img id="thumbnailML" src="assets/img/01.jpg" data-img="assets/img/01.jpg" alt="Tela 15.6">
+                            <img id="thumbnailML" src="{% static "img/01.jpg" %}" data-img="{% static "img/01.jpg" %}" alt="Tela 15.6">
 
-                            <img id="thumbnailML" src="assets/img/02.jpg" data-img="assets/img/02.jpg" alt="Tela 15.6">
+                            <img id="thumbnailML" src="{% static "img/02.jpg" %}" data-img="{% static "img/02.jpg" %}" alt="Tela 15.6">
 
-                            <img id="thumbnailML" src="assets/img/03.jpg" data-img="assets/img/03.jpg" alt="Tela 15.6">
+                            <img id="thumbnailML" src="{% static "img/03.jpg" %}" data-img="{% static "img/03.jpg" %}" alt="Tela 15.6">
 
-                            <img id="thumbnailML" src="assets/img/04.jpg" data-img="assets/img/04.jpg" alt="Tela 15.6">
+                            <img id="thumbnailML" src="{% static "img/04.jpg" %}" data-img="{% static "img/04.jpg" %}" alt="Tela 15.6">
 
                         </div>
 
                         <div class="col-md-10">
-                            <img id="boxThumbnailML" src="assets/img/01.jpg" alt="Tela 15.6">
+                            <img id="boxThumbnailML" src="{% static "img/01.jpg" %}" alt="Tela 15.6">
                         </div>
 
                     </div>
@@ -85,9 +85,7 @@
                             <fieldset>
                                 <legend>Preço</legend>
                                 <div class="form-market-place-price">
-                                    <strong>
-                                        R$ 269<sup>00</sup>
-                                    </strong>
+                                    <strong>R$ {{ product.price }}</strong>
                                 </div>
                             </fieldset>
 
@@ -97,7 +95,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <a href="" title="">
-                                                <img src="assets/img/card.png" alt="Cartão de credito">
+                                                <img src="{% static "img/card.png" %}" alt="Cartão de credito">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -109,14 +107,14 @@
                                                         R$ 26<sup>00</sup>
                                                     </strong>
 
-                                                    com <img src="assets/img/mercado-pago.png" alt="Mercado pago">
+                                                    com <img src="{% static "img/mercado-pago.png" %}" alt="Mercado pago">
                                                 </p>
 
                                                 <p class="creditcards">
                                                     <label data-block="methods">
-                                                        <img src="assets/img/visa.png" alt="Visa">
-                                                        <img src="assets/img/master.png" alt="Master">
-                                                        <img src="assets/img/boleto.png" alt="Boleto">
+                                                        <img src="{% static "img/visa.png" %}" alt="Visa">
+                                                        <img src="{% static "img/master.png" %}" alt="Master">
+                                                        <img src="{% static "img/boleto.png" %}" alt="Boleto">
                                                     </label>
                                                 </p>
                                             </a>
@@ -136,7 +134,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <a href="" title="">
-                                                <img src="assets/img/truck.png" alt="Cartão de credito">
+                                                <img src="{% static "img/truck.png" %}" alt="Cartão de credito">
                                             </a>
                                         </div>
                                         <div class="media-body">
@@ -187,7 +185,7 @@
 
                             <div class="media">
                                 <div class="media-left shield-media-left">
-                                    <img src="assets/img/shield.png" alt="Compra garantida">
+                                    <img src="{% static "img/shield.png" %}" alt="Compra garantida">
 
                                 </div>
                                 <div class="media-body">
@@ -215,7 +213,7 @@
                     </h2>
 
                     <p class="header-info-market-place">
-                        <i class="fa fa-map-marker"></i>  Localizado em Natal (Rio Grande do Norte)
+                        <i class="fa fa-map-marker"></i>  {{ product.user.username }} ({{ product.user.email }})
                     </p>
                 </header>
 
@@ -371,7 +369,7 @@
                         <div class="col-md-10 warranty-market-place-media-body">
                             <div class="col-sx-12 col-md-12 warranty-market-place-media-content">
                                 <div class="col-md-1">
-                                    <img src="assets/img/shield.png" alt="Compra garantida">
+                                    <img src="{% static 'img/shield.png' %}" alt="Compra garantida">
                                 </div>
                                 <div class="col-md-11 warranty-media-content-info">
                                     <p>Compra Garantida com Mercado Pago: <br> Receba o produto que espera ou devolvemos o seu dinheiro</p>
@@ -413,47 +411,7 @@
 
                 <article class="specs-market-place-media-info">
 
-                    <p>********************************* DISPLAY 15.6 LED CHIMEI INNOLUX*****************************************</p>
-                    <h2>Compatibilidade:</h2>
-                    <p>TELA LED 15.6 PN: N156BGE-L21 CONECTOR ESQUERDO</p>
-                    <p>Tamanho: WideScreen de 15.6 polegadas</p>
-                    <p>Resolução: WXGA (1366x768) HD</p>
-                    <p>Tipo: BRILHO</p>
-                    <p>Tipo de luz de fundo: LED</p>
-                    <p>Conector de sinal de vídeo: 40 pinos</p>
-                    <p>Estado: Nova classe A +</p>
-                    <h2>Garantia: 6 Meses</h2>
-                    <p>MODELOS COMPATÍVEIS</p>
-                    <p>B156XW02 LTN156AT02 LTN156AT09 LP156WH2(TL)(A1)</p>
-                    <p>LP156WH2(TL)(AA) LP156WH2(TL)(AC) LP156WH2(TL)(B1)</p>
-                    <p>LP156WH2(TL)(E1) LP156WH2(TL)(F1) LP156WH2(TL)(Q1)</p>
-                    <p>LP156WH2(TL)(R1) CLAA156WA11A CLAA156WA11S</p>
-                    <p>BT156GW01 BT156GW02 HT156WXB-100</p>
-                    <p>****ATENÇÃO DEVIDO A PROBLEMAS DE LÓGISTICA DOS CORREIOS NÃO RECOMENDO VIA PAC PARA FORTALEZA E SIM SEDEX Ex. VIA PAC CHEGA MAIS RÁPIDO EM PORTO ALEGRE DO QUE FORTALEZA QUE FICA AQUI DO MEU LADO!</p>
-                    <h3>OBSERVAÇÕES IMPORTANTES</h3>
-                    <p>1. SÓ CLICK EM COMPRAR SE REALMENTE ABSOLUTAMENTE TEM A CERTEZA QUE VAI ADQUIRIR ESTE PRODUTO</p>
-                    <p>2. CASO CLIQUE EM COMPRAR DAREI UM PRAZO DE 7 DIAS CORRIDOS A CONTAR DO DIA EM QUE EFETUOU O LANCE</p>
-                    <p>3. DO CONTRARIO NEGATIVAREI</p>
-                    <p>4. FAÇA PERGUNTAS A VONTADE ANTES DE QUALQUER DUVIDA!</p>
-
-                    <ul>
-                        <li>1. SÓ CLICK EM COMPRAR SE REALMENTE ABSOLUTAMENTE TEM A CERTEZA QUE VAI ADQUIRIR ESTE PRODUTO</li>
-                        <li>2. CASO CLIQUE EM COMPRAR DAREI UM PRAZO DE 7 DIAS CORRIDOS A CONTAR DO DIA EM QUE EFETUOU O LANCE</li>
-                        <li>3. DO CONTRARIO NEGATIVAREI</li>
-                        <li>4. FAÇA PERGUNTAS A VONTADE ANTES DE QUALQUER DUVIDA!</li>
-                        <li>1. SÓ CLICK EM COMPRAR SE REALMENTE ABSOLUTAMENTE TEM A CERTEZA QUE VAI ADQUIRIR ESTE PRODUTO</li>
-                        <li>2. CASO CLIQUE EM COMPRAR DAREI UM PRAZO DE 7 DIAS CORRIDOS A CONTAR DO DIA EM QUE EFETUOU O LANCE</li>
-                        <li>3. DO CONTRARIO NEGATIVAREI</li>
-                        <li>4. FAÇA PERGUNTAS A VONTADE ANTES DE QUALQUER DUVIDA!</li>
-                    </ul>
-
-                    <ol>
-                        <li>1. SÓ CLICK EM COMPRAR SE REALMENTE ABSOLUTAMENTE TEM A CERTEZA QUE VAI ADQUIRIR ESTE PRODUTO</li>
-                        <li>2. CASO CLIQUE EM COMPRAR DAREI UM PRAZO DE 7 DIAS CORRIDOS A CONTAR DO DIA EM QUE EFETUOU O LANCE</li>
-                        <li>3. DO CONTRARIO NEGATIVAREI</li>
-                        <li>4. FAÇA PERGUNTAS A VONTADE ANTES DE QUALQUER DUVIDA!</li>
-                    </ol>
-
+                    <p>{{ product.description }}</p>
                 </article>
             </div>
         </section>

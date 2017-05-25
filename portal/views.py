@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from portal.models import Product, Category
-from portal.form import ProductForm
+from portal.forms import ProductForm
 
 import logging
 

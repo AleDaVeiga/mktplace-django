@@ -3,97 +3,100 @@
 {% block title %}Meus anuncios - Market Place{% endblock %}
 
 {% block content %}
-    <h3>Novo Produto</h3>
-    <br>
+    <section class="section-content">
+        <div class="container">
+            <h3>Novo Produto</h3>
+            <br>
 
 
-    <form action="" method="post">
-    {% csrf_token %}
-        <div class="row">
-            <div class="col-md-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
 
-                <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.subject.errors }}</span>
 
-                <div class="form-group">
-                    <label>{{ form.name.label }}</label>
-                    {{ form.name }}
+                        <div class="form-group">
+                            <label>{{ form.name.label }}</label>
+                            {{ form.name }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <span class="text-danger">{{ form.subject.errors }}</span>
+
+                        <div class="form-group">
+                            <label>{{ form.quantity.label }}</label>
+                            {{ form.quantity }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <span class="text-danger">{{ form.subject.errors }}</span>
+
+                        <div class="form-group">
+                            <label>{{ form.price.label }}</label>
+                            {{ form.price }}
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="col-md-3">
 
-                <span class="text-danger">{{ form.subject.errors }}</span>
+                <div class="row">
+                    <div class="col-md-12">
 
-                <div class="form-group">
-                    <label>{{ form.quantity.label }}</label>
-                    {{ form.quantity }}
+                        <span class="text-danger">{{ form.subject.errors }}</span>
+
+                        <div class="form-group">
+                            <label>{{ form.short_description.label }}</label>
+                            {{ form.short_description }}
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
 
-                <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.subject.errors }}</span>
 
-                <div class="form-group">
-                    <label>{{ form.price.label }}</label>
-                    {{ form.price }}
+                        <div class="form-group">
+                            <label>{{ form.description.label }}</label>
+                            {{ form.description }}
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Categorias</label>
+                            <select multiple name="category" class="form-control">
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>{{ form.status.label }}</label>
+                            <select name="status" class="form-control">
+                                <option value="Active">Ativo</option>
+                                <option value="Inactive">Inativo</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">Salvar</button>
+            </form>
 
         </div>
-
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <span class="text-danger">{{ form.subject.errors }}</span>
-
-                <div class="form-group">
-                    <label>{{ form.short_description.label }}</label>
-                    {{ form.short_description }}
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <span class="text-danger">{{ form.subject.errors }}</span>
-
-                <div class="form-group">
-                    <label>{{ form.description.label }}</label>
-                    {{ form.description }}
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>Categorias</label>
-                    <select multiple name="category" class="form-control">
-                        {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>{{ form.status.label }}</label>
-                    <select name="status" class="form-control">
-                        <option value="Active">Ativo</option>
-                        <option value="Inactive">Inativo</option>
-                    </select>
-
-                </div>
-            </div>
-        </div>
-
-    <button type="submit" class="btn btn-success">Salvar</button>
-    </form>
-
-
+    </section>
 {% endblock %}

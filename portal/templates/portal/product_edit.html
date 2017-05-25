@@ -3,102 +3,105 @@
 {% block title %}Meus anuncios - Market Place{% endblock %}
 
 {% block content %}
-    <h3>Editando: {{ product.name }}</h3>
-    <br>
+    <section class="section-content">
+        <div class="container">
+            <h3>Editando: {{ product.name }}</h3>
+            <br>
 
 
-    <form action="" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-md-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
 
-                <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.subject.errors }}</span>
 
-                <div class="form-group">
-                    <label for="">{{ form.name.label }}</label>
-                    <input type="text" class="form-control" name="name" value="{{ product.name }}">
+                        <div class="form-group">
+                            <label for="">{{ form.name.label }}</label>
+                            <input type="text" class="form-control" name="name" value="{{ product.name }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <span class="text-danger">{{ form.subject.errors }}</span>
+
+                        <div class="form-group">
+                            <label for="">{{ form.quantity.label }}</label>
+                            <input type="number" class="form-control" name="quantity" value="{{ product.quantity }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <span class="text-danger">{{ form.subject.errors }}</span>
+
+                        <div class="form-group">
+                            <label for="">{{ form.price.label }}</label>
+                            <input type="text" class="form-control" name="price" value="{{ product.price }}">
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="col-md-3">
 
-                <span class="text-danger">{{ form.subject.errors }}</span>
+                <div class="row">
+                    <div class="col-md-12">
 
-                <div class="form-group">
-                    <label for="">{{ form.quantity.label }}</label>
-                    <input type="number" class="form-control" name="quantity" value="{{ product.quantity }}">
+                        <span class="text-danger">{{ form.subject.errors }}</span>
+
+                        <div class="form-group">
+                            <label for="">{{ form.short_description.label }}</label>
+                            <input type="text" class="form-control" name="short_description" value="{{ product.short_description }}">
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
 
-                <span class="text-danger">{{ form.subject.errors }}</span>
+                        <span class="text-danger">{{ form.subject.errors }}</span>
 
-                <div class="form-group">
-                    <label for="">{{ form.price.label }}</label>
-                    <input type="text" class="form-control" name="price" value="{{ product.price }}">
+                        <div class="form-group">
+                            <label for="">{{ form.description.label }}</label>
+                            <textarea class="form-control" rows="10" name="description">{{ product.description }}</textarea>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
 
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Categorias</label>
+                            <select multiple name="categories" class="form-control">
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>{{ form.status.label }}</label>
+                            <select name="status" class="form-control">
+                                <option value="{{ product.status }}">{{ product.status }}</option>
+                                {% if product.status == 'Active' %}
+                                    <option value="Inactive">Inactive</option>
+                                {% else %}
+                                    <option value="Active">Active</option>
+                                {% endif %}
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-info">Editar</button>
+            </form>
         </div>
-
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <span class="text-danger">{{ form.subject.errors }}</span>
-
-                <div class="form-group">
-                    <label for="">{{ form.short_description.label }}</label>
-                    <input type="text" class="form-control" name="short_description" value="{{ product.short_description }}">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <span class="text-danger">{{ form.subject.errors }}</span>
-
-                <div class="form-group">
-                    <label for="">{{ form.description.label }}</label>
-                    <textarea class="form-control" rows="10" name="description">{{ product.description }}</textarea>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>Categorias</label>
-                    <select multiple name="categories" class="form-control">
-                        {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>{{ form.status.label }}</label>
-                    <select name="status" class="form-control">
-                        <option value="{{ product.status }}">{{ product.status }}</option>
-                        {% if product.status == 'Active' %}
-                            <option value="Inactive">Inactive</option>
-                        {% else %}
-                            <option value="Active">Active</option>
-                        {% endif %}
-                    </select>
-
-                </div>
-            </div>
-        </div>
-
-        <button type="submit" class="btn btn-info">Editar</button>
-    </form>
-
+    </section>
 
 {% endblock %}
