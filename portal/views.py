@@ -18,29 +18,35 @@ def my_ads(request):
 
 
 def product_new(request):
-    context = {}
     categories = Category.objects.all()
     
-    form = ProductForm()
     if request.method == 'POST':
+        form = ProductForm(request.POST)
         if form.is_valid():
             product = Product()
+            product.user = request.user
             product.name = form.cleaned_data['name']
             product.quantity = form.cleaned_data['quantity']
             product.price = form.cleaned_data['price']
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
-            category = Category.objects.filter(pk=form.cleaned_data['category']).first()
-            if category:
-                product.categories = category
-
+            product.status = 'Active'
+            # product.categories = form.cleaned_data['categories']
+    
             product.save()
             return redirect('my_ads')
-        context['form'] = form,
+        context = {
+            'form': form,
+            'categories': categories
+        }
         return render(request, 'portal/product_new.html', context)
-            
-    context['form'] = form,
-    context['categories'] = categories,
+    
+    form = ProductForm()
+    
+    context = {
+        'form': form,
+        'categories': categories
+    }
 
     return render(request, 'portal/product_new.html', context)
 

@@ -15,6 +15,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
@@ -25,8 +26,8 @@ class Product(models.Model):
     short_description = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     STATUS_CHOICES = (
-        ('Active','Active'),
-        ('Inactive','Inactive'),
+        ('Active', 'Active'),
+        ('Inactive', 'Inactive'),
     )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Inactive")
 
