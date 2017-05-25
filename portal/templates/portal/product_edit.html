@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <label for="">{{ form.name.label }}</label>
-                    <input type="text" class="form-control" value="{{ product.name }}">
+                    <input type="text" class="form-control" name="name" value="{{ product.name }}">
                 </div>
             </div>
 
@@ -72,8 +72,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">{{ form.categories.label }}</label>
-                    <select name="category" class="form-control" required="required">
-                        {% for category in product.categories.all %}
+                    <select multiple name="category" class="form-control">
+                        {% for category in categories %}
                             <option value="{{ category.id }}">{{ category.name }}</option>
                         {% endfor %}
                     </select>

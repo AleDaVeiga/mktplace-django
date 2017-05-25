@@ -31,7 +31,9 @@ def product_new(request):
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
             product.status = 'Active'
-            # product.categories = form.cleaned_data['categories']
+            categories = Category.objects.filter(pk__in=request.POST.getlist('categories'))
+            if categories:
+                product.categories = categories
     
             product.save()
             return redirect('my_ads')
@@ -58,19 +60,22 @@ def product_edit(request, product_id):
     form = ProductForm()
 
     if request.method == 'POST':
+        form = ProductForm(request.POST)
         if form.is_valid():
-            product = Product()
+            product = product
+            product.user = request.user
             product.name = form.cleaned_data['name']
             product.quantity = form.cleaned_data['quantity']
             product.price = form.cleaned_data['price']
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
-            category = Category.objects.filter(pk=form.cleaned_data['category']).first()
-            if category:
-                product.categories = category
-
+            product.status = 'Active'
+            categories = Category.objects.filter(pk__in=request.POST.getlist('categories'))
+            if categories:
+                product.categories = categories
+    
             product.save()
-            form = ProductForm()
+            return redirect('my_ads')
 
     context = {
         'form': form,
@@ -79,3 +84,14 @@ def product_edit(request, product_id):
     }
 
     return render(request, 'portal/product_edit.html', context)
+
+
+def product_delete(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    try:
+        product.delete()
+    except Exception as e:
+        return e
+    
+    return redirect('my_ads')

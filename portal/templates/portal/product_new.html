@@ -78,16 +78,14 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">{{ form.categories.label }}</label>
-                    <select multiple name="categories" class="form-control" required="required">
-                        <option>Selecione</option>
+                    <select multiple name="category" class="form-control">
                         {% for category in categories %}
-                        <option value="{{ category.id }}">{{ category.name }}</option>
+                            <option value="{{ category.id }}">{{ category.name }}</option>
                         {% endfor %}
                     </select>
 
                 </div>
             </div>
-
         </div>
 
     <button type="submit" class="btn btn-success">Salvar</button>
