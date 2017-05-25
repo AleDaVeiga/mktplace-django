@@ -19,6 +19,7 @@ def my_ads(request):
 
 def product_new(request):
     categories = Category.objects.all()
+    form = ProductForm()
     
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -37,13 +38,6 @@ def product_new(request):
     
             product.save()
             return redirect('my_ads')
-        context = {
-            'form': form,
-            'categories': categories
-        }
-        return render(request, 'portal/product_new.html', context)
-    
-    form = ProductForm()
     
     context = {
         'form': form,
@@ -56,7 +50,6 @@ def product_new(request):
 def product_edit(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     categories = Category.objects.all()
-
     form = ProductForm()
 
     if request.method == 'POST':
