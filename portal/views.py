@@ -19,6 +19,15 @@ def my_ads(request):
     return render(request, 'portal/my_ads.html', context)
 
 
+def product_show(request, id):
+    product = get_object_or_404(Product, pk=id, status='Active')
+
+    context = {
+        'product': product
+    }
+    return render(request, 'portal/product_show.html', context)
+
+
 def product_new(request):
     categories = Category.objects.all()
     form = ProductForm()
