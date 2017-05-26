@@ -83,7 +83,15 @@ def product_new(request):
 def product_edit(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     categories = Category.objects.all()
-    form = ProductForm()
+    form = ProductForm(initial={
+                        'name': product.name,
+                        'quantity': product.quantity,
+                        'price': product.price,
+                        'short_description': product.short_description,
+                        'description': product.description,
+                        'categories': product.categories.all(),
+                        'status': product.status,
+                        })
 
     if request.method == 'POST':
         form = ProductForm(request.POST)

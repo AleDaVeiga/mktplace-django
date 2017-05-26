@@ -18,7 +18,7 @@
 
                         <div class="form-group">
                             <label for="">{{ form.name.label }}</label>
-                            <input type="text" class="form-control" name="name" value="{{ product.name }}" required="required">
+                            {{ form.name }}
                         </div>
                     </div>
 
@@ -28,7 +28,7 @@
 
                         <div class="form-group">
                             <label for="">{{ form.quantity.label }}</label>
-                            <input type="number" class="form-control" name="quantity" value="{{ product.quantity }}" required="required">
+                            {{ form.quantity }}
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
 
                         <div class="form-group">
                             <label for="">{{ form.price.label }}</label>
-                            <input type="text" class="form-control" name="price" value="{{ product.price }}" required="required">
+                            {{ form.price }}
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
 
                         <div class="form-group">
                             <label for="">{{ form.short_description.label }}</label>
-                            <input type="text" class="form-control" name="short_description" value="{{ product.short_description }}" required="required">
+                            {{ form.short_description }}
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
 
                         <div class="form-group">
                             <label for="">{{ form.description.label }}</label>
-                            <textarea class="form-control" rows="10" name="description" required="required">{{ product.description }}</textarea>
+                            {{ form.description }}
                         </div>
 
                     </div>
@@ -81,15 +81,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>{{ form.status.label }}</label>
-                            <select name="status" class="form-control">
-                                <option value="{{ product.status }}">{{ product.status }}</option>
-                                {% if product.status == 'Active' %}
-                                    <option value="Inactive">Inactive</option>
-                                {% else %}
-                                    <option value="Active">Active</option>
-                                {% endif %}
-                            </select>
-
+                            {{ form.status }}
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 from django import forms
-from portal.models import Category
+from portal.models import Category, Product
 
 
 class ProductForm(forms.Form):
@@ -26,18 +26,27 @@ class ProductForm(forms.Form):
                                         )
 
     description = forms.CharField(label='Descrição',
+                                  required=True,
                                   widget=forms.Textarea(attrs={'class': 'form-control'})
                                   )
 
     choices = [(cat.id, str(cat)) for cat in Category.objects.all()]
     categories = forms.MultipleChoiceField(label='Categorias',
+                                           required=True,
                                            widget=forms.SelectMultiple(attrs={'class': 'form-control'}),
-                                           choices=choices
+                                           choices=choices,
                                            )
 
-    status = forms.CharField(label='Status',
-                             widget=forms.Textarea(attrs={'class': 'form-control'})
-                             )
+    STATUS_CHOICES = (
+        ('Active', 'Ativo',),
+        ('Inactive', 'Inativo',),
+    )
+
+    status = forms.ChoiceField(label='Status',
+                               widget=forms.Select(attrs={'class': 'form-control'}),
+                               required=True,
+                               choices=STATUS_CHOICES,
+                               )
 
 
 class ProductQuestionForm(forms.Form):
