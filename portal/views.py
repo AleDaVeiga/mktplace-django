@@ -42,7 +42,7 @@ def product_question(request, product_id):
             question.user = request.user
             question.product = product
             question.question = form.cleaned_data['question']
-            question.status = 'Inactive'
+            question.status = 'Active'
             question.save()
 
     return redirect('product_show', product.slug)
