@@ -38,3 +38,10 @@ class ProductForm(forms.Form):
     status = forms.CharField(label='Status',
                              widget=forms.Textarea(attrs={'class': 'form-control'})
                              )
+
+
+class ProductQuestionForm(forms.Form):
+    question = forms.CharField(label='Perguntar',
+                               widget=forms.Textarea(),
+                               required=True,
+                               )

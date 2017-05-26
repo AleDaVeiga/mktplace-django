@@ -426,65 +426,27 @@
                 </header>
 
                 <section class="section-questions-market-place-content">
-                    <form class="questions-form" action="" method="post">
-                        <textarea id="question" class="form-control" name="question" type="text" placeholder="Escreva uma pergunta..." title="Escreva uma pergunta" maxlength="2000" data-uid="10"></textarea>
+                    <form class="questions-form" action="{% url 'product_question' product.id %}" method="post">
+                        {% csrf_token %}
+                        <textarea id="question" class="form-control" name="question" placeholder="Escreva uma pergunta..." required="required"></textarea>
 
                         <button type="submit" class="btn btn-info">Perguntar</button>
                     </form>
 
                     <ul class="ml-questions-list">
-                        <li>
-                            <article class="ml-questions-list-question">
-                                <p>
-                                    <i class="fa fa-comment"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi dolores eligendi esse est fugiat harum, ipsa nam provident reiciendis repellat similique tenetur, ullam voluptas! Exercitationem illo quam reprehenderit soluta voluptatem.</article>
-                            </p>
-                            <article class="ml-questions-list-answer">
-                                <p>
-                                    <i class="fa fa-comments"></i> Lorem ipsum similique tenetur, ullam voluptas! Exercitationem illo quam reprehenderit soluta voluptatem. <span>- 05/05/2016 17:20</span>
-                                </p>
-                            </article>
-                        </li>
 
+                        {% for q in questions %}
                         <li>
                             <article class="ml-questions-list-question">
-                                <p>
-                                    <i class="fa fa-comment"></i> Lorem ipsum dolor sit amet,
-                                </p>
-                            </article>
+                                <p><i class="fa fa-comment"></i> {{ q.question }}</p>
+                                </article>
                             <article class="ml-questions-list-answer">
-                                <p>
-                                    <i class="fa fa-comments"></i> Lorem ipsum similique tenetur, ullam voluptas! Exercitationem illo qua  <span>- 05/05/2016 17:20</span>
-                                </p>
+                                {% for a in q.get_answers %}
+                                    <p><i class="fa fa-comments"></i> {{ a.answer }} <span> - {{ a.user.username }}</span></p>
+                                {% endfor %}
                             </article>
                         </li>
-
-                        <li>
-                            <article class="ml-questions-list-question">
-                                <p>
-                                    <i class="fa fa-comment"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. repellat similique tenetur, ullam voluptas! Exercitationem illo quam reprehenderit soluta voluptatem.
-                                </p>
-                            </article>
-                            <article class="ml-questions-list-answer">
-                                <p>
-                                    <i class="fa fa-comments"></i> Lorem ipsum similique tenetur, ullam voluptas! Exercitationem illo quam reprehenderit soluta voluptatem.  <span>- 05/05/2016 17:20</span>
-                                </p>
-                            </article>
-                        </li>
-
-                        <li>
-                            <article class="ml-questions-list-question">
-                                <p>
-                                    <i class="fa fa-comment"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. repellat similique tenetur, ullam voluptas! Exercitationem illo quam reprehenderit soluta voluptatem.
-                                </p>
-                            </article>
-                            <article class="ml-questions-list-answer">
-                                <p>
-                                    <i class="fa fa-comments"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea et explicabo fuga fugiat nobis, ratione? Accusamus adipisci aliquid consectetur,
-                                    deleniti ducimus et ex id maiores modi officia perferendis quasi voluptates! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id mollitia perspiciatis voluptatibus?
-                                    Debitis delectus dignissimos doloremque in laborum necessitatibus obcaecati odio officia omnis optio, possimus sed soluta, tempora ut voluptas?  <span>- 05/05/2016 17:20</span>
-                                </p>
-                            </article>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </section>
             </div>

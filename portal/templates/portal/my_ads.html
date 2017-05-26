@@ -14,6 +14,7 @@
                     <th>Código</th>
                     <th>Título</th>
                     <th>Status</th>
+                    <th>Perguntas em aberto</th>
                     <th colspan="2">Ação</th>
                 </tr>
                 {% for product in products %}
@@ -21,6 +22,7 @@
                         <td>{{ product.id }}</td>
                         <td>{{ product.name }}</td>
                         <td>{{ product.status }}</td>
+                        <td>{{ product.count_questions_no_answer }}</td>
                         <td><a href="{% url 'product_edit' product.id %}" title="Editar">Editar</a></td>
 
                         {% if product.status == 'Active' %}
