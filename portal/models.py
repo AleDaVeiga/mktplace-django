@@ -52,7 +52,7 @@ class Product(models.Model):
 
 
 class ProductQuestion(models.Model):
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     product = models.ForeignKey('Product')
     question = models.TextField()
     STATUS_CHOICES = (
@@ -73,7 +73,7 @@ class ProductQuestion(models.Model):
 
 
 class ProductAnswer(models.Model):
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     product_question = models.ForeignKey(ProductQuestion)
     answer = models.TextField()
     STATUS_CHOICES = (
