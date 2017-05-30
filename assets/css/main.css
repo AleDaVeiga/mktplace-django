@@ -5940,7 +5940,8 @@ button.close {
   background-color: #f4f4f4;
   border-top: none;
   border-bottom: none;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  padding-top: 30px}
   .navbar-vip-market-place .vip-market-place-container {
     padding-bottom: 5px;
     border-bottom: 1px solid #ddd; }
@@ -5995,7 +5996,8 @@ button.close {
 
 /* fim content*/
 .section-header-market-place {
-  background-color: #f4f4f4; }
+  background-color: #f4f4f4;
+  padding-bottom: 30px;}
   .section-header-market-place h1 {
     font-size: 2.1em;
     text-align: center; }
