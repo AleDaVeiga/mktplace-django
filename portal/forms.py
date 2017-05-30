@@ -1,5 +1,39 @@
 from django import forms
-from portal.models import Category, Product
+from portal.models import Category, Product, UserProfile
+
+
+class ProductFormEdit(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ('user', )
+
+        widgets = {
+            'account_type': forms.Select(attrs={'class': 'form-control'}),
+            'company_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'cpf_cnpj': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'address2': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'district': forms.TextInput(attrs={'class': 'form-control'}),
+            'state': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
+            'zipcode': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+        labels = {
+            'account_type': "Tipo de Conta",
+            'company_name': "Nome da Empresa",
+            'cpf_cnpj': "CPF/CNPJ",
+            'address': "Endereço",
+            'address2': "Complemento",
+            'city': "Cidade",
+            'district': "Bairro",
+            'state': "Estado",
+            'country': "País",
+            'zipcode': "CEP",
+            'phone': "Telefone",
+        }
 
 
 # exemplo com forms.ModelForm usado no edit
