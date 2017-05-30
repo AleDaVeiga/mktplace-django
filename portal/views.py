@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from portal.models import Product, Category, ProductQuestion, UserProfile
 from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm
+from portal.repositories import ProductRepository
 
 import logging
 
@@ -11,6 +13,7 @@ def home(request):
     return render(request, 'portal/home.html', {})
 
 
+@login_required
 def my_ads(request):
     products = Product.objects.filter(user=request.user)
 
@@ -33,6 +36,18 @@ def product_show(request, slug):
     return render(request, 'portal/product_show.html', context)
 
 
+def product_search(request):
+    products = ProductRepository().search_products(
+        request.GET.get('s')
+    )
+
+    context = {
+        'products': products,
+    }
+
+    return render(request, 'portal/product_search.html', context)
+
+
 def product_question(request, product_id):
     product = get_object_or_404(Product, id=product_id, status='Active')
 
@@ -49,6 +64,7 @@ def product_question(request, product_id):
     return redirect('product_show', product.slug)
 
 
+@login_required
 def product_new(request):
     categories = Category.objects.all()
     form = ProductForm()
@@ -81,6 +97,7 @@ def product_new(request):
     return render(request, 'portal/product_new.html', context)
 
 
+@login_required
 def product_edit(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     categories = Category.objects.all()
@@ -109,6 +126,7 @@ def product_edit(request, product_id):
     return render(request, 'portal/product_edit.html', context)
 
 
+@login_required
 def my_data(request):
     user = User.objects.get(pk=request.user.pk)
     user_form = UserForm(instance=user)

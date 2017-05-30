@@ -6451,6 +6451,33 @@ button.close {
         font-size: 0.8em;
         color: #999; }
 
+html, body {
+    height: 100%;
+}
+.page-market-place {
+    height: 100%;
+}
+
+.section-content {
+    height: 100%;
+}
+.section-search img {
+  width: 100px;  }
+
+.section-search .media {
+  margin-bottom: 30px }
+
+
+.section-search .media-body a h4 {
+color: #0033bb; }
+
+.section-search .media-body a p {
+  font-size: 1.2em;
+  color: #666; }
+
+.section-search .media-body a:hover {
+  text-decoration: none }
+
 .footer-market-place {
   background-color: #f7f7f7;
   border-top: 1px solid #eee;
