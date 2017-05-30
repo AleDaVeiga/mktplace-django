@@ -2,6 +2,34 @@ from django import forms
 from portal.models import Category, Product
 
 
+# exemplo com forms.ModelForm usado no edit
+class ProductFormEdit(forms.ModelForm):
+    class Meta:
+        model = Product
+        exclude = ('slug', 'user', )
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'categories': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'quantity': forms.TextInput(attrs={'class': 'form-control'}),
+            'price': forms.TextInput(attrs={'class': 'form-control'}),
+            'short_description': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+        labels = {
+            'name': "Nome",
+            'categories': "Categories",
+            'quantity': "Quantidade",
+            'price': "Preço",
+            'short_description': "Descrição curta",
+            'description': "Descrição",
+        }
+
+
+
+# exemplo com forms.Form usado no new
 class ProductForm(forms.Form):
     name = forms.CharField(label='Nome',
                            max_length=255,

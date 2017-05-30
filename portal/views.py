@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from portal.models import Product, Category, ProductQuestion
-from portal.forms import ProductForm, ProductQuestionForm
+from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm
 
 import logging
 
@@ -83,20 +83,11 @@ def product_new(request):
 def product_edit(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     categories = Category.objects.all()
-    form = ProductForm(initial={
-                        'name': product.name,
-                        'quantity': product.quantity,
-                        'price': product.price,
-                        'short_description': product.short_description,
-                        'description': product.description,
-                        'categories': product.categories.all(),
-                        'status': product.status,
-                        })
+    form = ProductFormEdit(instance=product)
 
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductFormEdit(request.POST)
         if form.is_valid():
-            product = product
             product.user = request.user
             product.name = form.cleaned_data['name']
             product.quantity = form.cleaned_data['quantity']
@@ -104,10 +95,7 @@ def product_edit(request, product_id):
             product.short_description = form.cleaned_data['short_description']
             product.description = form.cleaned_data['description']
             product.status = form.cleaned_data['status']
-            categories = Category.objects.filter(id__in=request.POST.getlist('categories'))
-            if categories:
-                product.categories = categories
-    
+            product.categories = form.cleaned_data['categories']
             product.save()
             return redirect('my_ads')
 
