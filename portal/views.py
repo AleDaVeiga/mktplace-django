@@ -22,10 +22,12 @@ def my_ads(request):
 def product_show(request, slug):
     product = get_object_or_404(Product, slug=slug, status='Active')
     questions = ProductQuestion.objects.filter(product=product, status='Active')
+    form = ProductQuestionForm()
 
     logging.warning(questions)
 
     context = {
+        'form': form,
         'product': product,
         'questions': questions
     }

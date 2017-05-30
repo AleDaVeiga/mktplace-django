@@ -79,6 +79,9 @@ class ProductForm(forms.Form):
 
 class ProductQuestionForm(forms.Form):
     question = forms.CharField(label='Perguntar',
-                               widget=forms.Textarea(),
+                               widget=forms.Textarea(attrs={'class': 'form-control',
+                                                            'id': 'question',
+                                                            'placeholder': 'Escreva uma pergunta...'
+                                                            }),
                                required=True,
                                )

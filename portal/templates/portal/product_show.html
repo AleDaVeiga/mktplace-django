@@ -428,7 +428,8 @@
                 <section class="section-questions-market-place-content">
                     <form class="questions-form" action="{% url 'product_question' product.id %}" method="post">
                         {% csrf_token %}
-                        <textarea id="question" class="form-control" name="question" placeholder="Escreva uma pergunta..." required="required"></textarea>
+
+                        {{ form.as_p }}
 
                         <button type="submit" class="btn btn-info">Perguntar</button>
                     </form>
