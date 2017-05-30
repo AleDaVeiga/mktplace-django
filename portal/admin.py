@@ -1,8 +1,15 @@
 from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 
-from portal.models import Category, Product, ProductAnswer, ProductQuestion
+from portal.models import Category, Product, ProductAnswer, ProductQuestion, UserProfile
+
+
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    can_delete = False
 
 
 class CategoryAdmin(AjaxSelectAdmin):
@@ -24,6 +31,10 @@ class ProductAdmin(AjaxSelectAdmin):
     })
 
 
+class UserAdmin(UserAdmin):
+    inlines = (UserProfileInline,)
+
+
 class ProductAnswerInline(admin.StackedInline):
     model = ProductAnswer
     can_delete = False
@@ -34,6 +45,8 @@ class ProductQuestionAdmin(admin.ModelAdmin):
     inlines = (ProductAnswerInline,)
 
 
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductQuestion, ProductQuestionAdmin)

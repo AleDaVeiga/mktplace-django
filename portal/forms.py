@@ -1,17 +1,35 @@
 from django import forms
+from django.contrib.auth.models import User
+
 from portal.models import Category, Product, UserProfile
 
 
-class ProductFormEdit(forms.ModelForm):
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+        labels = {
+            'first_name': "Nome",
+            'last_name': "Sobrenome",
+        }
+
+
+class UserProfileForm(forms.ModelForm):
+
     class Meta:
         model = UserProfile
         exclude = ('user', )
 
         widgets = {
-            'account_type': forms.Select(attrs={'class': 'form-control'}),
-            'company_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'cpf_cnpj': forms.TextInput(attrs={'class': 'form-control'}),
+            'cpf': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'number': forms.TextInput(attrs={'class': 'form-control'}),
             'address2': forms.TextInput(attrs={'class': 'form-control'}),
             'city': forms.TextInput(attrs={'class': 'form-control'}),
             'district': forms.TextInput(attrs={'class': 'form-control'}),
@@ -22,10 +40,9 @@ class ProductFormEdit(forms.ModelForm):
         }
 
         labels = {
-            'account_type': "Tipo de Conta",
-            'company_name': "Nome da Empresa",
-            'cpf_cnpj': "CPF/CNPJ",
+            'cpf': "CPF",
             'address': "Endereço",
+            'number': "Número",
             'address2': "Complemento",
             'city': "Cidade",
             'district': "Bairro",

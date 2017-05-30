@@ -91,13 +91,7 @@ class ProductAnswer(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
-    ACCOUNT_TYPE_CHOICES = (
-        ('PF', 'PF'),
-        ('PJ', 'PJ'),
-    )
-    account_type = models.CharField(max_length=20, choices=ACCOUNT_TYPE_CHOICES, default="PF")
-    company_name = models.CharField(max_length=150, null=True, blank=True)
-    cpf_cnpj = models.CharField(max_length=35, null=True, blank=True)
+    cpf = models.CharField(max_length=35, null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     number = models.CharField(max_length=20, null=True, blank=True)
     address2 = models.CharField(max_length=255, null=True, blank=True)
