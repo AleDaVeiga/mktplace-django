@@ -10,8 +10,7 @@
             <div class="container">
                 <div class="vip-market-place-container">
                     <ol class="breadcrumb">
-                        <a href="{% url 'my_ads' %}" title="Voltar para a lista" >Voltar para a lista</a>
-                        <span class="vip-market-place-mobile-none">|</span>
+
                         {% for category in product.categories.all %}
                             <li><a href="" title="">{{ category.name }}</a></li>
                         {% endfor %}
