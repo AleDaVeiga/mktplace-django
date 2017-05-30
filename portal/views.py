@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
 from portal.models import Product, Category, ProductQuestion
@@ -108,3 +109,12 @@ def product_edit(request, product_id):
     }
 
     return render(request, 'portal/product_edit.html', context)
+
+
+def my_data(request):
+    user = User.objects.filter(pk=request.user.pk)
+
+    context = {
+        'user': user
+    }
+    return render(request, 'portal/my_data.html', context)
