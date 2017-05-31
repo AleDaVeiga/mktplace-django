@@ -20,7 +20,7 @@
                     {% for category in categories %}
                         <li>
                             <a href="{% url 'portal_search' %}?category={{ category.slug }}" title="{{ category.name }}">
-                            {{ category.name }}</a>
+                                {{ category.name }}</a>
                         </li>
 
                         {% for subcategory in category.cat_child.all|dictsort:"name"|dictsort:"order" %}
@@ -60,8 +60,9 @@
                             </div>
                         </div>
                     {% endfor %}
-                {% elif products %}
-                    {% for product in products %}
+
+                {% elif results %}
+                    {% for product in results %}
                         <div class="media">
                             <div class="media-left">
                                 <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">

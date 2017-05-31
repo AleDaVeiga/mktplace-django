@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from portal.models import Product, Category, ProductQuestion, UserProfile
 from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm
@@ -170,7 +170,6 @@ def search(request):
     category = request.GET.get('category', "")
 
     results = None
-    products = None
 
     if qs:
         params = {"hitsPerPage": 7}
@@ -178,13 +177,12 @@ def search(request):
 
     if category:
         cat = get_object_or_404(Category, slug=category)
-        products = Product.objects.filter(categories=cat)
+        results = Product.objects.filter(categories=cat)
 
     logging.warning(results)
 
     context = {
         'categories': categories,
-        'products': products,
         'results': results,
         'qs': qs,
     }

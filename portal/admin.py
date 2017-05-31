@@ -27,7 +27,6 @@ class ProductAdmin(AjaxSelectAdmin):
     list_display = ('id', 'name', 'short_description', 'status')
     form = make_ajax_form(Product, {
         'user': 'user',
-        # 'categories': 'categories'
     })
 
 
