@@ -6465,7 +6465,8 @@ html, body {
   width: 100px;  }
 
 .section-search .media {
-  margin-bottom: 30px }
+  margin-bottom: 30px;
+    border-bottom: 1px solid #ddd}
 
 
 .section-search .media-body a h4 {
@@ -6474,6 +6475,14 @@ color: #0033bb; }
 .section-search .media-body a p {
   font-size: 1.2em;
   color: #666; }
+
+.section-search .media-body .navbar-right p{
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-right: 20px;
+  color: #900;
+  position: relative;
+  bottom: 40px;}
 
 .section-search .media-body a:hover {
   text-decoration: none }
