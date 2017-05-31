@@ -170,7 +170,7 @@ def search(request):
     results = None
 
     if qs:
-        params = {"hitsPerPage": 5}
+        params = {"hitsPerPage": 7}
         results = algoliasearch.raw_search(Product, qs, params)
 
     logging.warning(results)

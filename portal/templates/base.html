@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <div class="input-group-icon">
                         <div class="input-group">
-                            <input name="qs" type="text" id="search-input" class="form-control" placeholder="" value="{{ qs }}">
+                            <input name="qs" type="text" id="search" class="form-control" placeholder="" value="{{ qs }}">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </span>
@@ -94,13 +94,9 @@
 <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/vendor/star-rating.min.js' %}"></script>
 <script src="{% static 'js/vendor/star-rating_locale_pt-br.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-<script type="text/javascript">
-    window.appConfig = {
-        algolia_app: "{{ ALGOLIA_APPLICATION_ID }}",
-        algolia_key: "{{ ALGOLIA_SEARCH_KEY }}"
-    };
-</script>
+<script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
 </body>
 </html>
