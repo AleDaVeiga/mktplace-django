@@ -19,7 +19,7 @@ class ProductIndex(AlgoliaIndex):
     index_name = 'product_index'
 
 
-class CategoryIndex(AlgoliaIndex):
-    fields = ('id', 'name', 'slug',)
-    settings = {'searchableAttributes': ['name']}
-    index_name = 'product_index'
+# class CategoryIndex(AlgoliaIndex):
+#     fields = ('id', 'name', 'slug', 'categories',)
+#     settings = {'searchableAttributes': ['name']}
+#     index_name = 'category_index'

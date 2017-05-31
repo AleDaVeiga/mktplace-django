@@ -21,7 +21,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     user = models.ForeignKey(User)
-    categories = models.ManyToManyField(Category, blank=True, related_name='cat_product')
+    categories = models.ManyToManyField(Category, blank=True, related_name='categories')
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     short_description = models.CharField(max_length=255)
