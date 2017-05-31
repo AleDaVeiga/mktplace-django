@@ -6,32 +6,79 @@
 {% block content %}
     <section class="section-content section-search">
         <div class="container">
-            <h3>Busca por: {% if request.GET.qs %}{{ request.GET.qs }} {% endif %}</h3>
+
+            <div class="col-sm-12">
+                <h3>Busca por: {% if request.GET.qs %}{{ request.GET.qs }}{% else %}{{ request.GET.category }}{% endif %} </h3>
+            </div>
             <br>
 
-            {% if results.hits %}
+            <div class="col-sm-3">
+                <ul class="list-group">
+                    <li class="disabled">
+                        Categorias
+                    </li>
+                    {% for category in categories %}
+                        <li>
+                            <a href="{% url 'portal_search' %}?category={{ category.slug }}" title="{{ category.name }}">
+                            {{ category.name }}</a>
+                        </li>
 
-                {% for product in results.hits %}
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
-                                <img class="media-object" src="{% static "img/01.jpg" %}" alt="{{ product.name }}">
-                            </a>
+                        {% for subcategory in category.cat_child.all|dictsort:"name"|dictsort:"order" %}
+                            {% if not subcategory.hidden %}
+                                <li class="subcategories">
+                                    <a href="{% url 'portal_search' %}?category={{ subcategory.slug }}" title="{{ subcategory.name }}">
+                                        {{ subcategory.name }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+
+            <div class="col-sm-9">
+                {% if results.hits %}
+
+                    {% for product in results.hits %}
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
+                                    <img class="media-object" src="{% static "img/01.jpg" %}" alt="{{ product.name }}">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
+                                    <h4 class="media-heading">{{ product.name }}</h4>
+                                    <p>{{ product.short_description }}</p>
+                                </a>
+                            </div>
                         </div>
-                        <div class="media-body">
-                            <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
-                                <h4 class="media-heading">{{ product.name }}</h4>
-                                <p>{{ product.short_description }}</p>
-                            </a>
+                    {% endfor %}
+                {% elif products %}
+                    {% for product in products %}
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
+                                    <img class="media-object" src="{% static "img/01.jpg" %}" alt="{{ product.name }}">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
+                                    <h4 class="media-heading">{{ product.name }}</h4>
+                                    <p>{{ product.short_description }}</p>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
 
-            {% else %}
-                <p>Sem resultados para busca: {{ request.GET.s }} </p>
+                {% else %}
+                    <p>Sem resultados para busca: {{ request.GET.s }} </p>
 
-                <a href="{% url 'home' %}" title="Home">Voltar</a>
-            {% endif %}
+                    <a href="{% url 'home' %}" title="Home">Voltar</a>
+                {% endif %}
+            </div>
 
 
         </div>

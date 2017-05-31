@@ -8,9 +8,9 @@ class PortalConfig(AppConfig):
 
     def ready(self):
         Product = self.get_model('Product')
-        Category = self.get_model('Category')
         algoliasearch.register(Product, ProductIndex)
-        algoliasearch.register(Category, CategoryIndex)
+        # Category = self.get_model('Category')
+        # algoliasearch.register(Category, CategoryIndex)
 
 
 class ProductIndex(AlgoliaIndex):

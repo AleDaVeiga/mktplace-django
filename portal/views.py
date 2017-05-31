@@ -165,17 +165,26 @@ def my_data(request):
 
 
 def search(request):
+    categories = Category.objects.filter(hidden=False, parent__isnull=True).order_by('name')
     qs = request.GET.get('qs', "")
+    category = request.GET.get('category', "")
 
     results = None
+    products = None
 
     if qs:
         params = {"hitsPerPage": 7}
         results = algoliasearch.raw_search(Product, qs, params)
 
+    if category:
+        cat = get_object_or_404(Category, slug=category)
+        products = Product.objects.filter(categories=cat)
+
     logging.warning(results)
 
     context = {
+        'categories': categories,
+        'products': products,
         'results': results,
         'qs': qs,
     }

@@ -6478,6 +6478,23 @@ color: #0033bb; }
 .section-search .media-body a:hover {
   text-decoration: none }
 
+.section-search .list-group {
+    margin-left: 0;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 15px 0 15px 15px;
+}
+
+.section-search .list-group li{
+    list-style: none;
+}
+.section-search .list-group li.disabled{
+    padding: 0 0 10px 0;
+}
+
+.section-search .list-group li.subcategories {
+    padding-left: 10px;
+}
 .footer-market-place {
   background-color: #f7f7f7;
   border-top: 1px solid #eee;
