@@ -29,11 +29,11 @@
 
         <div class="collapse navbar-collapse navbar-collapse-market-place" id="bs-example-navbar-market-place">
 
-            <form class="navbar-form navbar-left navbar-form-market-place" method="" action="">
+            <form class="navbar-form navbar-left navbar-form-market-place" action="{% url 'portal_search' %}">
                 <div class="form-group">
                     <div class="input-group-icon">
                         <div class="input-group">
-                            <input type="text" name="s" class="form-control" required="required">
+                            <input name="qs" type="text" id="search-input" class="form-control" placeholder="" value="{{ qs }}">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                             </span>
@@ -74,7 +74,7 @@
 
 <div class="page-market-place">
 
-        {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
 
     <!--FOOTER-->
@@ -95,5 +95,12 @@
 <script src="{% static 'js/vendor/star-rating.min.js' %}"></script>
 <script src="{% static 'js/vendor/star-rating_locale_pt-br.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script type="text/javascript">
+    window.appConfig = {
+        algolia_app: "{{ ALGOLIA_APPLICATION_ID }}",
+        algolia_key: "{{ ALGOLIA_SEARCH_KEY }}"
+    };
+</script>
 </body>
 </html>

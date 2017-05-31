@@ -6,17 +6,12 @@
 {% block content %}
     <section class="section-content section-search">
         <div class="container">
-            <h3>Busca por: {% if request.GET.s %}{{ request.GET.s }} {% endif %}</h3>
+            <h3>Busca por: {% if request.GET.qs %}{{ request.GET.qs }} {% endif %}</h3>
             <br>
 
-            {% if products is None %}
-                <p>Sem resultados para busca: {{ request.GET.s }} </p>
+            {% if results.hits %}
 
-                <a href="{% url 'home' %}" title="Home">Voltar</a>
-            {% else %}
-
-
-                {% for product in products %}
+                {% for product in results.hits %}
                     <div class="media">
                         <div class="media-left">
                             <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
@@ -32,7 +27,12 @@
                     </div>
                 {% endfor %}
 
+            {% else %}
+                <p>Sem resultados para busca: {{ request.GET.s }} </p>
+
+                <a href="{% url 'home' %}" title="Home">Voltar</a>
             {% endif %}
+
 
         </div>
     </section>

@@ -1,9 +1,12 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 from portal.models import Product, Category, ProductQuestion, UserProfile
 from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm
+
+import algoliasearch_django as algoliasearch
 
 import logging
 
@@ -159,3 +162,22 @@ def my_data(request):
     }
 
     return render(request, 'portal/my_data.html', context)
+
+
+def search(request):
+    qs = request.GET.get('qs', "")
+
+    results = None
+
+    if qs:
+        params = {"hitsPerPage": 5}
+        results = algoliasearch.raw_search(Product, qs, params)
+
+    logging.warning(results)
+
+    context = {
+        'results': results,
+        'qs': qs,
+    }
+
+    return render(request, 'portal/product_search.html', context)
