@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 
 from portal.models import Product, Category, ProductQuestion, UserProfile
 from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm
-from portal.repositories import ProductRepository
 
 import logging
 
@@ -36,16 +35,6 @@ def product_show(request, slug):
     return render(request, 'portal/product_show.html', context)
 
 
-def product_search(request):
-    products = ProductRepository().search_products(
-        request.GET.get('s')
-    )
-
-    context = {
-        'products': products,
-    }
-
-    return render(request, 'portal/product_search.html', context)
 
 
 def product_question(request, product_id):
