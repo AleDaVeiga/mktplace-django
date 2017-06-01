@@ -168,12 +168,19 @@ def search(request):
     categories = Category.objects.filter(hidden=False, parent__isnull=True).order_by('name')
     qs = request.GET.get('qs', "")
     category = request.GET.get('category', "")
+    page = request.GET.get('page', "0")
 
     results = None
     cat_name = ""
+    next_page = ""
+    previous_page = ""
+
+    if page:
+        next_page = int(page) + 1
+        previous_page = int(page) - 1
 
     if qs:
-        params = {"hitsPerPage": 3}
+        params = {"hitsPerPage": 1, "page": page, }
         results = algoliasearch.raw_search(Product, qs, params)
 
     if category:
@@ -188,6 +195,8 @@ def search(request):
         'categories': categories,
         'results': results,
         'qs': qs,
+        'next_page': next_page,
+        'previous_page': previous_page,
     }
 
     return render(request, 'portal/product_search.html', context)

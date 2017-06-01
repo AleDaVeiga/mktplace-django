@@ -87,6 +87,27 @@
 
                     <a href="{% url 'home' %}" title="Home">Voltar</a>
                 {% endif %}
+
+                <nav aria-label="Page navigation">
+                    <div class="pagination">
+                        <span class="step-links">
+
+                            {% if results.page > 0 %}
+                                <a href="?qs={{ results.query }}&page={{ previous_page }}"><span aria-hidden="true">&laquo;</span></a>
+                            {% endif %}
+
+                            <span class="current">
+                                Página {{ next_page }} de {{ results.nbPages }}
+                            </span>
+
+                            {% if results.page >= 0 and next_page < results.nbPages %}
+                                <a href="?qs={{ results.query }}&page={{ next_page }}"><span aria-hidden="true">&raquo;</span></a>
+                            {% endif %}
+
+                        </span>
+                    </div>
+                </nav>
+
             </div>
 
 
