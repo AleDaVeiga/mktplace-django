@@ -170,6 +170,7 @@ def search(request):
     category = request.GET.get('category', "")
 
     results = None
+    str_category = ""
 
     if qs:
         params = {"hitsPerPage": 7}
@@ -178,10 +179,12 @@ def search(request):
     if category:
         cat = get_object_or_404(Category, slug=category)
         results = Product.objects.filter(categories=cat)
+        str_category = category
 
     logging.warning(results)
 
     context = {
+        'str_category': str_category,
         'categories': categories,
         'results': results,
         'qs': qs,
