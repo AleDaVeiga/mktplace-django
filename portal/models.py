@@ -33,8 +33,8 @@ class Product(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Inactive")
 
     @property
-    def count_questions_no_answer(self):
-        return self.productquestion_set.filter(status='Active', productanswer__isnull=True).count()
+    def questions_no_answer(self):
+        return self.productquestion_set.filter(status='Active', productanswer__isnull=True)
 
     def save(self, *args, **kwargs):
         is_new = self.pk is None

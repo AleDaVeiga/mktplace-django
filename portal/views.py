@@ -38,9 +38,7 @@ def product_show(request, slug):
     return render(request, 'portal/product_show.html', context)
 
 
-
-
-def product_question(request, product_id):
+def product_new_question(request, product_id):
     product = get_object_or_404(Product, id=product_id, status='Active')
 
     if request.method == 'POST':
@@ -162,6 +160,14 @@ def my_data(request):
     }
 
     return render(request, 'portal/my_data.html', context)
+
+
+def product_question(request, product_id):
+    return render(request, 'portal/product_question.html', {})
+
+
+def product_answer_question(request, product_id, question_id):
+    return render(request, 'portal/product_answer_question.html', {})
 
 
 def search(request):
