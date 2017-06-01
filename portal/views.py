@@ -170,21 +170,21 @@ def search(request):
     category = request.GET.get('category', "")
 
     results = None
-    str_category = ""
+    cat_name = ""
 
     if qs:
-        params = {"hitsPerPage": 7}
+        params = {"hitsPerPage": 3}
         results = algoliasearch.raw_search(Product, qs, params)
 
     if category:
         cat = get_object_or_404(Category, slug=category)
+        cat_name = cat.name
         results = Product.objects.filter(categories=cat)
-        str_category = category
 
     logging.warning(results)
 
     context = {
-        'str_category': str_category,
+        'cat_name': cat_name,
         'categories': categories,
         'results': results,
         'qs': qs,
