@@ -136,3 +136,13 @@ class ProductQuestionForm(forms.Form):
                                                             }),
                                required=True,
                                )
+
+
+class AnswerQuestionForm(forms.Form):
+    question = forms.CharField(label='Responder',
+                               widget=forms.Textarea(attrs={'class': 'form-control',
+                                                            'id': 'answer',
+                                                            'placeholder': 'resposta...'
+                                                            }),
+                               required=True,
+                               )

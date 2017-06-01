@@ -6542,3 +6542,9 @@ color: #0033bb; }
   font-weight: bold;
   font-style: normal;
 }
+
+.section-content .panel-body #answer {
+  height: 200px;
+}
+
+

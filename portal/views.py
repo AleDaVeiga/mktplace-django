@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from portal.models import Product, Category, ProductQuestion, UserProfile
-from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm
+from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm, AnswerQuestionForm
 
 import algoliasearch_django as algoliasearch
 
@@ -173,7 +172,22 @@ def product_question(request, product_id):
 
 
 def product_answer_question(request, product_id, question_id):
-    return render(request, 'portal/product_answer_question.html', {})
+    product = get_object_or_404(Product, pk=product_id)
+    question = get_object_or_404(ProductQuestion, pk=question_id)
+
+    form = AnswerQuestionForm()
+
+    context = {
+        'form': form,
+        'product': product,
+        'question': question,
+    }
+
+    return render(request, 'portal/product_answer_question.html', context)
+
+
+def answer_question_new(request):
+    return redirect('home')
 
 
 def search(request):

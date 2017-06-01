@@ -7,7 +7,21 @@
         <div class="container">
             <h3>Respoder perguntas</h3>
             <br>
+            <p><a href="{% url 'product_question'  product.id %}" title="Responder perguntas">Voltar</a></p>
 
+
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ question.question }}</div>
+                <div class="panel-body">
+                    <form class="questions-form" action="{% url 'answer_question_new' product.id question.id %}" method="post">
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button type="submit" class="btn btn-info">Perguntar</button>
+                    </form>
+                </div>
+            </div>
 
 
         </div>
