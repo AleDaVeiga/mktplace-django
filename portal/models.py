@@ -80,7 +80,7 @@ class ProductAnswer(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
     )
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Inactive")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Active")
 
     class Meta:
         verbose_name_plural = "Answers"

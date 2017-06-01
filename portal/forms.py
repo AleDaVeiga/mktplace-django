@@ -139,7 +139,7 @@ class ProductQuestionForm(forms.Form):
 
 
 class AnswerQuestionForm(forms.Form):
-    question = forms.CharField(label='Responder',
+    answer = forms.CharField(label='Responder',
                                widget=forms.Textarea(attrs={'class': 'form-control',
                                                             'id': 'answer',
                                                             'placeholder': 'resposta...'
