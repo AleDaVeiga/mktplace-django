@@ -163,7 +163,13 @@ def my_data(request):
 
 
 def product_question(request, product_id):
-    return render(request, 'portal/product_question.html', {})
+    product = get_object_or_404(Product, pk=product_id)
+
+    context = {
+        'product': product,
+    }
+
+    return render(request, 'portal/product_question.html', context)
 
 
 def product_answer_question(request, product_id, question_id):

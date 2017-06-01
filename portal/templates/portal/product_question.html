@@ -5,9 +5,17 @@
 {% block content %}
     <section class="section-content">
         <div class="container">
-            <h3>Perguntas do produto</h3>
+            <h3>Perguntas do produto {{ product.name }}</h3>
             <br>
 
+            <ul class="list-group">
+                <li class="list-group-item disabled">Perguntas</li>
+                {% for question in product.questions_no_answer %}
+                    <li class="list-group-item">{{ question.question }}
+                        <span class="navbar-right"> <a href="{% url 'product_answer_question' product.id question.id %}" title="Responder">Responder</a> </span>
+                    </li>
+                {% endfor %}
+            </ul>
 
 
         </div>
