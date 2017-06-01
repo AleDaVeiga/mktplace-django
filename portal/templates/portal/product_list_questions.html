@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Perguntas - Market Place{% endblock %}
+
+{% block content %}
+    <section class="section-content">
+        <div class="container">
+            <h3>Perguntas do produto {{ product.name }}</h3>
+            <br>
+            <p><a href="{% url 'my_ads' %}" title="Editar">Voltar</a></p>
+
+            <ul class="list-group">
+                <li class="list-group-item disabled">Perguntas</li>
+
+
+                    <li>
+                        <article class="ml-questions-list-question">
+                            <p><i class="fa fa-comment"></i> pergunta</p>
+                        </article>
+                        <article class="ml-questions-list-answer">
+
+                                <p><i class="fa fa-comments"></i> resposta <span> editar</span></p>
+
+                        </article>
+                    </li>
+
+            </ul>
+
+
+        </div>
+    </section>
+{% endblock %}
+
+
