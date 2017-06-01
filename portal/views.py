@@ -203,6 +203,15 @@ def answer_question_new(request, product_id, question_id):
     return redirect('home')
 
 
+def product_list_questions(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    context = {
+        'product': product,
+    }
+    return render(request, 'portal/product_list_questions.html', context)
+
+
 def search(request):
     categories = Category.objects.filter(hidden=False, parent__isnull=True).order_by('name')
     qs = request.GET.get('qs', "")

@@ -7,24 +7,21 @@
         <div class="container">
             <h3>Perguntas do produto {{ product.name }}</h3>
             <br>
-            <p><a href="{% url 'my_ads' %}" title="Editar">Voltar</a></p>
-
-            <ul class="list-group">
-                <li class="list-group-item disabled">Perguntas</li>
+            <p><a href="{% url 'my_ads' %}" title="Voltar">Voltar</a></p>
 
 
-                    <li>
-                        <article class="ml-questions-list-question">
-                            <p><i class="fa fa-comment"></i> pergunta</p>
-                        </article>
-                        <article class="ml-questions-list-answer">
+            {% for question in product.productquestion_set.all %}
+                <ul class="list-group">
+                    <li class="list-group-item disabled">{{ question.question }}</li>
 
-                                <p><i class="fa fa-comments"></i> resposta <span> editar</span></p>
-
-                        </article>
+                    {% for answer in question.get_answers %}
+                    <li class="list-group-item">{{ answer.answer }}
+                        <span class="navbar-right">  <a href="" title="Editar">Editar</a> </span>
                     </li>
+                    {% endfor %}
 
-            </ul>
+                </ul>
+            {% endfor %}
 
 
         </div>
