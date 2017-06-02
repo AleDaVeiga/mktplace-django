@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from portal.models import Product, Category, ProductQuestion, UserProfile, ProductAnswer
 from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm, AnswerQuestionForm
@@ -17,6 +18,16 @@ def home(request):
 @login_required
 def my_ads(request):
     products = Product.objects.filter(user=request.user)
+
+    paginator = Paginator(products, 15)
+    page = request.GET.get('page', 1)
+
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
 
     context = {
         'products': products
@@ -208,8 +219,21 @@ def answer_question_new(request, product_id, question_id):
 def product_list_questions(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
+    questions = ProductQuestion.objects.filter(product=product).order_by('-id')
+
+    paginator = Paginator(questions, 15)
+    page = request.GET.get('page', 1)
+
+    try:
+        questions = paginator.page(page)
+    except PageNotAnInteger:
+        questions = paginator.page(1)
+    except EmptyPage:
+        questions = paginator.page(paginator.num_pages)
+
     context = {
         'product': product,
+        'questions': questions,
     }
     return render(request, 'portal/product_list_questions.html', context)
 

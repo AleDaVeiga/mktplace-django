@@ -10,24 +10,40 @@
             <p><a href="{% url 'my_ads' %}" title="Voltar">Voltar</a></p>
 
 
-            {% for question in product.productquestion_set.all %}
+            {% for question in questions %}
                 <ul class="list-group">
                     <li class="list-group-item disabled">{{ question.question }}</li>
 
-                {% if question.get_answers.count > 0 %}
-                    {% for answer in question.get_answers %}
-                    <li class="list-group-item">{{ answer.answer }}
-                        <span class="navbar-right">  <a href="{% url 'product_answer_question_edit' product.id question.id answer.id %}" title="Editar">Editar</a> </span>
-                    </li>
-                    {% endfor %}
-                {% else %}
-                    <li class="list-group-item list-group-item-danger">
-                        <a href="{% url 'product_answer_question' product.id question.id %}" title="Responder">Responder</a>
-                    </li>
-                {% endif %}
+                    {% if question.get_answers.count > 0 %}
+                        {% for answer in question.get_answers %}
+                            <li class="list-group-item">{{ answer.answer }}
+                                <span class="navbar-right">  <a href="{% url 'product_answer_question_edit' product.id question.id answer.id %}" title="Editar">Editar</a> </span>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="list-group-item list-group-item-danger">
+                            <a href="{% url 'product_answer_question' product.id question.id %}" title="Responder">Responder</a>
+                        </li>
+                    {% endif %}
 
                 </ul>
             {% endfor %}
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if questions.has_previous %}
+                        <a href="?page={{ questions.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a>
+                    {% endif %}
+
+                    <span class="current">
+                        Página {{ questions.number }} de {{ questions.paginator.num_pages }}
+                    </span>
+
+                    {% if questions.has_next %}
+                        <a href="?page={{ questions.next_page_number }}"><span aria-hidden="true">&raquo;</span></a>
+                    {% endif %}
+                </span>
+            </div>
 
 
         </div>

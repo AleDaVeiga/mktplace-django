@@ -15,7 +15,7 @@
                     <th>Título</th>
                     <th>Status</th>
                     <th>Perguntas em aberto</th>
-                    <th colspan="2">Ação</th>
+                    <th colspan="3" class="text-center">Ação</th>
                 </tr>
                 {% for product in products %}
                     <tr>
@@ -44,6 +44,22 @@
                     </tr>
                 {% endfor %}
             </table>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if products.has_previous %}
+                        <a href="?page={{ products.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a>
+                    {% endif %}
+
+                    <span class="current">
+                        Página {{ products.number }} de {{ products.paginator.num_pages }}
+                    </span>
+
+                    {% if products.has_next %}
+                        <a href="?page={{ products.next_page_number }}"><span aria-hidden="true">&raquo;</span></a>
+                    {% endif %}
+                </span>
+            </div>
         </div>
     </section>
 {% endblock %}
