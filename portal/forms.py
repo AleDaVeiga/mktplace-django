@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from portal.models import Category, Product, UserProfile
+from portal.models import Category, Product, UserProfile, ProductAnswer
 
 
 class UserForm(forms.ModelForm):
@@ -138,11 +138,21 @@ class ProductQuestionForm(forms.Form):
                                )
 
 
-class AnswerQuestionForm(forms.Form):
-    answer = forms.CharField(label='Responder',
-                               widget=forms.Textarea(attrs={'class': 'form-control',
-                                                            'id': 'answer',
-                                                            'placeholder': 'resposta...'
-                                                            }),
-                               required=True,
-                               )
+class AnswerQuestionForm(forms.ModelForm):
+    class Meta:
+        model = ProductAnswer
+        exclude = ('user', 'product_question',)
+
+        widgets = {
+            'answer': forms.Textarea(attrs={'class': 'form-control',
+                                            'id': 'answer',
+                                            'placeholder': 'resposta...'
+                                            }),
+
+            'status': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+        labels = {
+            'answer': "Resposta",
+            'status': "Status",
+        }

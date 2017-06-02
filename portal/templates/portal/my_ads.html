@@ -26,13 +26,13 @@
                             {{ product.questions_no_answer.count }}
 
                             {% if product.questions_no_answer.count > 0 %}
-                            <a href="{% url 'product_questions'  product.id %}" title="Responder perguntas">responder</a>
+                            <a href="{% url 'product_question' product.id %}" title="Responder perguntas">responder</a>
                             {% endif %}
 
                         </td>
                         <td><a href="{% url 'product_edit' product.id %}" title="Editar">Editar</a></td>
 
-                        {% if product.productquestion_set.all.count > 1 %}
+                        {% if product.productquestion_set.all.count >= 1 %}
                             <td><a href="{% url 'product_list_questions' product.id %}" title="Lista de perguntas">Lista de perguntas</a></td>
                         {% else %}
                             <td>Sem perguntas</td>

@@ -115,6 +115,7 @@ def product_edit(request, product_id):
     return render(request, 'portal/product_edit.html', context)
 
 
+# dados do user
 @login_required
 def my_data(request):
     user = User.objects.get(pk=request.user.pk)
@@ -161,6 +162,7 @@ def my_data(request):
     return render(request, 'portal/my_data.html', context)
 
 
+# questions
 def product_question(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
 
@@ -212,6 +214,33 @@ def product_list_questions(request, product_id):
     return render(request, 'portal/product_list_questions.html', context)
 
 
+def product_answer_question_edit(request, product_id, question_id, answer_id):
+    product = get_object_or_404(Product, pk=product_id)
+    question = get_object_or_404(ProductQuestion, pk=question_id)
+    answer = ProductAnswer.objects.get(pk=answer_id)
+
+    form = AnswerQuestionForm(instance=answer)
+
+    if request.method == 'POST':
+        form = AnswerQuestionForm(request.POST)
+        if form.is_valid():
+            answer.user = request.user
+            answer.answer = form.cleaned_data['answer']
+            answer.product_question = question
+            answer.save()
+
+            return redirect('product_list_questions', product.id)
+
+    context = {
+        'form': form,
+        'product': product,
+        'question': question,
+    }
+
+    return render(request, 'portal/product_answer_question_edit.html', context)
+
+
+# busca
 def search(request):
     categories = Category.objects.filter(hidden=False, parent__isnull=True).order_by('name')
     qs = request.GET.get('qs', "")
