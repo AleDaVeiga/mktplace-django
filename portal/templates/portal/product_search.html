@@ -39,6 +39,8 @@
 
 
             <div class="col-sm-9">
+
+                {# resultado algolia #}
                 {% if results.hits %}
 
                     {% for product in results.hits %}
@@ -83,6 +85,8 @@
                         </nav>
 
                 {% elif request.GET.category %}
+
+                    {# resultado get category #}
                     {% for product in results %}
                         <div class="media">
                             <div class="media-left">
