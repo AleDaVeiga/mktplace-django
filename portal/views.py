@@ -268,7 +268,7 @@ def product_answer_question_edit(request, product_id, question_id, answer_id):
 def search(request):
     categories = Category.objects.filter(hidden=False, parent__isnull=True).order_by('name')
     qs = request.GET.get('qs', "")
-    category = request.GET.get('category', "")
+    str_category = request.GET.get('category', "")
     page = request.GET.get('page', "0")
 
     results = None
@@ -284,14 +284,26 @@ def search(request):
         params = {"hitsPerPage": 1, "page": page, }
         results = algoliasearch.raw_search(Product, qs, params)
 
-    if category:
-        cat = get_object_or_404(Category, slug=category)
+    if str_category:
+        cat = get_object_or_404(Category, slug=str_category)
         cat_name = cat.name
         results = Product.objects.filter(categories=cat)
+
+        paginator = Paginator(results, 1)
+        page = request.GET.get('page', 1)
+
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+
 
     logging.warning(results)
 
     context = {
+        'str_category': str_category,
         'cat_name': cat_name,
         'categories': categories,
         'results': results,

@@ -61,6 +61,27 @@
                         </div>
                     {% endfor %}
 
+
+                    <nav aria-label="Page navigation">
+                            <div class="pagination">
+                                <span class="step-links">
+
+                                    {% if results.page > 0 %}
+                                        <a href="?qs={{ results.query }}&page={{ previous_page }}"><span aria-hidden="true">&laquo;</span></a>
+                                    {% endif %}
+
+                                    <span class="current">
+                                        Página {{ next_page }} de {{ results.nbPages }}
+                                    </span>
+
+                                    {% if results.page >= 0 and next_page < results.nbPages %}
+                                        <a href="?qs={{ results.query }}&page={{ next_page }}"><span aria-hidden="true">&raquo;</span></a>
+                                    {% endif %}
+
+                                </span>
+                            </div>
+                        </nav>
+
                 {% elif request.GET.category %}
                     {% for product in results %}
                         <div class="media">
@@ -82,31 +103,30 @@
                         </div>
                     {% endfor %}
 
+
+
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if results.has_previous %}
+                                <a href="?category={{ str_category }}&page={{ results.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a>
+                            {% endif %}
+
+                            <span class="current">
+                                Página {{ results.number }} de {{ results.paginator.num_pages }}
+                            </span>
+
+                            {% if results.has_next %}
+                                <a href="?category={{ str_category }}&page={{ results.next_page_number }}"><span aria-hidden="true">&raquo;</span></a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+
                 {% else %}
                     <p>Sem resultados para busca: {{ request.GET.s }} </p>
 
                     <a href="{% url 'home' %}" title="Home">Voltar</a>
                 {% endif %}
-
-                <nav aria-label="Page navigation">
-                    <div class="pagination">
-                        <span class="step-links">
-
-                            {% if results.page > 0 %}
-                                <a href="?qs={{ results.query }}&page={{ previous_page }}"><span aria-hidden="true">&laquo;</span></a>
-                            {% endif %}
-
-                            <span class="current">
-                                Página {{ next_page }} de {{ results.nbPages }}
-                            </span>
-
-                            {% if results.page >= 0 and next_page < results.nbPages %}
-                                <a href="?qs={{ results.query }}&page={{ next_page }}"><span aria-hidden="true">&raquo;</span></a>
-                            {% endif %}
-
-                        </span>
-                    </div>
-                </nav>
 
             </div>
 
