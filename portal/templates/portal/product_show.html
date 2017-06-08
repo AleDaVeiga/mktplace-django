@@ -10,9 +10,9 @@
             <div class="container">
                 <div class="vip-market-place-container">
                     <ol class="breadcrumb">
-
+                        <li><a href="{% url 'home' %}" title="Home">Home</a></li>
                         {% for category in product.categories.all %}
-                            <li><a href="" title="">{{ category.name }}</a></li>
+                            <li><a href="{% url 'portal_search' %}?category={{ category.slug }}" title="{{ category.name }}">{{ category.name }}</a></li>
                         {% endfor %}
                         <li><a href="" title="">{{ product.name }}</a></li>
                     </ol>

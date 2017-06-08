@@ -6548,3 +6548,35 @@ color: #0033bb; }
 }
 
 
+
+.page-home .list-group {
+    margin-left: 0;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 15px 0 15px 15px;
+}
+
+.page-home .list-group li{
+    list-style: none;
+}
+.page-home .list-group li.disabled{
+    padding: 0 0 10px 0;
+}
+
+.page-home .list-group li.subcategories {
+    padding-left: 10px;
+}
+
+.page-home .thumbnail {
+  min-height: 250px;
+}
+
+.page-home .thumbnail h3 {
+  font-size: 1.2em;
+  color: #0033bb;
+}
+
+.page-home .thumbnail p{
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #900;  }
