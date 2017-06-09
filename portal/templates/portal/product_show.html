@@ -61,7 +61,8 @@
                     <!--FORM COMPRA-->
                     <div class="col-sm-6 section-header-form-market-place">
 
-                        <form action="" method="get">
+                        <form action="{% url 'payment' product.id %}" method="post">
+                            {% csrf_token %}
                             <fieldset>
                                 <legend>Preço</legend>
                                 <div class="form-market-place-price">
@@ -84,7 +85,11 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-info">Comprar</button>
+                                        {% if request.user.is_authenticated %}
+                                            <button type="submit" class="btn btn-info">Comprar</button>
+                                        {% else %}
+                                            <a href="{% url 'login' %}?next=/product/{{ product.slug }}" class="btn btn-info">Comprar</a>
+                                        {% endif %}
                                     </div>
                                 </div>
 

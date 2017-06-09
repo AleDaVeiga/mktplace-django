@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from portal.models import Product, Category, ProductQuestion, UserProfile, ProductAnswer
-from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm, AnswerQuestionForm
+from portal.forms import ProductForm, ProductFormEdit, ProductQuestionForm, UserProfileForm, UserForm, AnswerQuestionForm, PaymentForm
 
 import algoliasearch_django as algoliasearch
 
@@ -331,3 +331,15 @@ def search(request):
     }
 
     return render(request, 'portal/product_search.html', context)
+
+
+def payment(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    form = PaymentForm()
+
+    context = {
+        'product': product,
+        'form': form,
+    }
+
+    return render(request, 'portal/payment.html', context)
