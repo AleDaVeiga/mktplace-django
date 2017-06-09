@@ -6,69 +6,30 @@
 {% block content %}
     <section class="section-content page-home">
         <div class="container">
-            <h3>Seja bem-vindo {{ request.user }}</h3>
+            <h2>Seja bem-vindo {{ request.user }}</h2>
+            {% for category in categories %}
 
-            <div class="col-sm-3">
-                <ul class="list-group">
-                    <li class="disabled">
-                        Categorias
-                    </li>
-                    {% for category in categories %}
-                        <li>
-                            <a href="{% url 'portal_search' %}?category={{ category.slug }}" title="{{ category.name }}">
-                                {{ category.name }}</a>
-                        </li>
-
-                        {% for subcategory in category.cat_child.all|dictsort:"name"|dictsort:"order" %}
-                            {% if not subcategory.hidden %}
-                                <li class="subcategories">
-                                    <a href="{% url 'portal_search' %}?category={{ subcategory.slug }}" title="{{ subcategory.name }}">
-                                        {{ subcategory.name }}
-                                    </a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                </ul>
-
-            </div>
+                <h3>{{ category.name }}:</h3>
 
 
-            <div class="col-sm-9">
                 <div class="row">
-                    {% for product in products %}
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
-                            <div class="thumbnail">
-                                <img src="{% static "img/01.jpg" %}" alt="{{ product.name }}">
-                                <div class="caption">
-                                    <h3>{{ product.name|truncatechars:30 }}</h3>
-                                    <p>R$ {{ product.price }}</p>
+                    {% for product in category.get_products %}
+                        <div class="col-sm-6 col-md-3">
+                            <a href="{% url 'product_show' product.slug %}" title="{{ product.name }}">
+                                <div class="thumbnail">
+                                    <img src="{% static "img/01.jpg" %}" alt="{{ product.name }}">
+                                    <div class="caption">
+                                        <h3>{{ product.name|truncatechars:30 }}</h3>
+                                        <p>R$ {{ product.price }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
+                            </a>
+                        </div>
                     {% endfor %}
                 </div>
 
+            {% endfor %}
 
-
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if products.has_previous %}
-                            <a href="?page={{ products.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a>
-                        {% endif %}
-
-                        <span class="current">
-                            Página {{ products.number }} de {{ products.paginator.num_pages }}
-                        </span>
-
-                        {% if products.has_next %}
-                            <a href="?page={{ products.next_page_number }}"><span aria-hidden="true">&raquo;</span></a>
-                        {% endif %}
-                    </span>
-                </div>
-            </div>
         </div>
     </section>
 {% endblock %}

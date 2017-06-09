@@ -16,12 +16,16 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def get_products(self):
+        return self.cat_products.filter(status='Active').order_by('-id')[:8]
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     user = models.ForeignKey(User)
-    categories = models.ManyToManyField(Category, blank=True, related_name='categories')
+    categories = models.ManyToManyField(Category, blank=True, related_name='cat_products')
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     short_description = models.CharField(max_length=255)

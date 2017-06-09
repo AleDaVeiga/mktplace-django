@@ -12,22 +12,12 @@ import logging
 
 
 def home(request):
-    categories = Category.objects.filter(hidden=False, parent__isnull=True).order_by('name')
-    products = Product.objects.filter(status='Active')
-
-    paginator = Paginator(products, 20)
-    page = request.GET.get('page', 1)
-
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+    categories = Category.objects.filter(hidden=False, parent__isnull=True)\
+                                 .exclude(cat_products__isnull=True)\
+                                 .order_by('name')
 
     context = {
         'categories': categories,
-        'products': products
     }
 
     return render(request, 'portal/home.html', context)
@@ -299,7 +289,7 @@ def search(request):
         previous_page = int(page) - 1
 
     if qs:
-        params = {"hitsPerPage": 1, "page": page, }
+        params = {"hitsPerPage": 15, "page": page, }
         results = algoliasearch.raw_search(Product, qs, params)
 
     if str_category:
@@ -307,7 +297,7 @@ def search(request):
         cat_name = cat.name
         results = Product.objects.filter(categories=cat)
 
-        paginator = Paginator(results, 1)
+        paginator = Paginator(results, 15)
         page = request.GET.get('page', 1)
 
         try:
