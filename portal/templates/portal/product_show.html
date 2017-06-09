@@ -88,7 +88,7 @@
                                         {% if request.user.is_authenticated %}
                                             <button type="submit" class="btn btn-info">Comprar</button>
                                         {% else %}
-                                            <a href="{% url 'login' %}?next=/product/{{ product.slug }}" class="btn btn-info">Comprar</a>
+                                            <a href="{% url 'login' %}?next=/payment/product/{{ product.id }}" class="btn btn-info">Comprar</a>
                                         {% endif %}
                                     </div>
                                 </div>

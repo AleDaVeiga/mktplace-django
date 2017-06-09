@@ -334,6 +334,7 @@ def search(request):
 
 
 def payment(request, product_id):
+
     product = get_object_or_404(Product, pk=product_id)
     form = PaymentForm()
 

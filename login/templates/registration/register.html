@@ -9,8 +9,6 @@
             <hr>
             <form method="post" action="{% url 'login_register' %}?next={{ request.GET.next }}" class="form-horizontal">
 
-
-
                 {% csrf_token %}
                 {{ form.as_p }}
                 <br>

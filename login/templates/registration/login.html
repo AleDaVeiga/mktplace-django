@@ -14,7 +14,7 @@
                 <input type="submit" value="Login">
 
                 {% if request.GET.next %}
-                    <a href="{% url 'login_register' %}?next={{ request.GET.next }}" title="">Cadastre-se</a>
+                    <a href="{% url 'login_register' %}?next={{ request.GET.next }}" title="Cadastre-se">Cadastre-se</a>
                 {% else %}
                     <a href="{% url 'login_register' %}" title="">Cadastre-se</a>
                 {% endif %}
