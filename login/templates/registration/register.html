@@ -7,7 +7,10 @@
         <div class="container">
             <h3>Cadastre-se</h3>
             <hr>
-            <form method="post" action="{% url 'login_register' %}" class="form-horizontal">
+            <form method="post" action="{% url 'login_register' %}?next={{ request.GET.next }}" class="form-horizontal">
+
+
+
                 {% csrf_token %}
                 {{ form.as_p }}
                 <br>

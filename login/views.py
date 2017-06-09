@@ -15,6 +15,9 @@ def register(request):
                 password=form.cleaned_data['password'],
                 email=form.cleaned_data['email']
             )
+
+            if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET.get('next'))
             return HttpResponseRedirect(reverse('login_register_success'))
 
     else:
