@@ -61,7 +61,7 @@
                     <!--FORM COMPRA-->
                     <div class="col-sm-6 section-header-form-market-place">
 
-                        <form action="{% url 'payment' product.id %}" method="post">
+                        <form action="{% url 'billing_payment' product.id %}" method="post">
                             {% csrf_token %}
                             <fieldset>
                                 <legend>Preço</legend>

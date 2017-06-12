@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ajax_select',
     'portal',
     'login',
+    'billing',
 ]
 
 MIDDLEWARE = [
