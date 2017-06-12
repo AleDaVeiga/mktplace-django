@@ -39,13 +39,13 @@ class PaymentForm(forms.Form):
                              widget=forms.TextInput(attrs={'class': 'form-control'})
                              )
 
-    month = forms.MultipleChoiceField(label='Vencimento',
+    month = forms.ChoiceField(label='Vencimento',
                                       required=True,
                                       widget=forms.Select(attrs={'class': 'form-control'}),
                                       choices=MONTH_CHOICES
                                       )
 
-    year = forms.MultipleChoiceField(label='Ano',
+    year = forms.ChoiceField(label='Ano',
                                      required=True,
                                      widget=forms.Select(attrs={'class': 'form-control'}),
                                      choices=YEAR_CHOICES

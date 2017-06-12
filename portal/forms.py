@@ -24,7 +24,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user', )
+        exclude = ('user', 'remote_customer_id')
 
         widgets = {
             'cpf': forms.TextInput(attrs={'class': 'form-control'}),

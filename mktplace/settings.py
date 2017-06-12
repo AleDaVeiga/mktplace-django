@@ -135,3 +135,6 @@ ALGOLIA = {
     'API_KEY': '01c6dc1f1dbc3f5c5ae85442ae546987'
 
 }
+
+IUGU_ACCOUNT_ID = os.environ['IUGU_ACCOUNT_ID']
+IUGU_API_TOKEN = os.environ['IUGU_API_TOKEN']
