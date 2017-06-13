@@ -43,16 +43,16 @@ class BillingService:
 
         return False
 
-    def transfer(self):
+    def transfer(self, product):
 
         percent_commission = settings.IUGU_COMMISSION_MARKET_PLACE
 
-        # math_result = math.ceil(product.price * percent_commission)
-        # result_amount = product.price - math_result
+        math_result = math.ceil(float(product.price) * float(percent_commission))
+        amount_cents = math_result * 100
 
         data_commission = {
             'receiver_id': settings.IUGU_ACCOUNT_ID,
-            'amount_cents': percent_commission,
+            'amount_cents': amount_cents,
         }
 
         transfer = Transfer().create(data_commission)
@@ -96,7 +96,7 @@ class BillingService:
                 order.payment_date = timezone.now()
                 order.total = product.price
 
-                transfer_commission = self.transfer()
+                transfer_commission = self.transfer(product)
                 # order.commission = transfer_commission['amount_localized']
 
                 order.save()
