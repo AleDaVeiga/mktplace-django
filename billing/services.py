@@ -96,12 +96,10 @@ class BillingService:
                 order.payment_date = timezone.now()
                 order.total = product.price
 
-                transfer_commission = self.transfer(product)
+                # transfer_commission = self.transfer(product)
                 # order.commission = transfer_commission['amount_localized']
 
                 order.save()
-
-                logging.warning(transfer_commission)
                 return order
         else:
             return False
