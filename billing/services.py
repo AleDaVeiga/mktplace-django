@@ -92,6 +92,7 @@ class BillingService:
                 order = Order()
                 order.user = user
                 order.merchant = product.user
+                order.product = product
                 order.status = "Approved"
                 order.payment_date = timezone.now()
                 order.total = product.price

@@ -1,10 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from portal.models import Product
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, related_name='order_user')
     merchant = models.ForeignKey(User, related_name='order_merchant')
+    product = models.ForeignKey(Product, null=True, blank=True, related_name='order_product')
     commission = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     total = models.DecimalField(max_digits=8, decimal_places=2)
     STATUS_CHOICES = (
@@ -17,4 +20,8 @@ class Order(models.Model):
 
     def __unicode__(self):
         return "#" + str(self.id)
+
+    @property
+    def get_product(self):
+        return self.product
 

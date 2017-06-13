@@ -9,7 +9,19 @@
             <br>
 
             <ul class="list-group">
-                <li>Valor: {{ order.total }}</li>
+                <li class="list-group-item">Produto: {{ order.get_product.name }}</li>
+                <li class="list-group-item">Valor: {{ order.total }}</li>
+                <li class="list-group-item">Vendedor: {{ order.merchant.first_name }}</li>
+                <li class="list-group-item">Status da Ordem:
+                    {% if order.status == 'Approved' %}
+                        Aprovado
+                    {% elif order.status == 'Pending' %}
+                        Pendente
+                    {% else %}
+                        Reprovado
+                    {% endif %}
+                </li>
+                <li class="list-group-item">Data: {{ order.created_at| date:'d/m/Y' }}</li>
             </ul>
         </div>
     </section>
