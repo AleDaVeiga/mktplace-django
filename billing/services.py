@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-
-from django.utils import timezone
+import math
 
 from billing.models import Order
 
@@ -11,7 +10,10 @@ from portal.models import UserProfile
 from iugu.customer import Customer, PaymentMethod
 from iugu.subscription import Subscription
 from iugu.token import Token
+from iugu.transfer import Transfer
+
 from django.conf import settings
+from django.utils import timezone
 
 
 class BillingService:
@@ -40,6 +42,22 @@ class BillingService:
             return user
 
         return False
+
+    def transfer(self):
+
+        percent_commission = settings.IUGU_COMMISSION_MARKET_PLACE
+
+        # math_result = math.ceil(product.price * percent_commission)
+        # result_amount = product.price - math_result
+
+        data_commission = {
+            'receiver_id': settings.IUGU_ACCOUNT_ID,
+            'amount_cents': percent_commission,
+        }
+
+        transfer = Transfer().create(data_commission)
+
+        return transfer
 
     def charge(self, user, product, payment_data):
         remote_user = self.create_remote_customer(user)
@@ -77,7 +95,13 @@ class BillingService:
                 order.status = "Approved"
                 order.payment_date = timezone.now()
                 order.total = product.price
+
+                transfer_commission = self.transfer()
+                # order.commission = transfer_commission['amount_localized']
+
                 order.save()
+
+                logging.warning(transfer_commission)
                 return order
         else:
             return False

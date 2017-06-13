@@ -13,6 +13,7 @@ class Order(models.Model):
         ('Approved', 'Approved'),
     )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Inactive")
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return "#" + str(self.id)

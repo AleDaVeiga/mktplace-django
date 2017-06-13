@@ -17,7 +17,7 @@ def payment(request, product_id):
 
     user = request.user
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get("first_name", ""):
         form = PaymentForm(request.POST)
         if form.is_valid():
             full_name = request.POST.get('first_name').split(' ', 1)
@@ -38,7 +38,8 @@ def payment(request, product_id):
 
             charge = BillingService().charge(user, product, card_data)
 
-            logging.warning(charge)
+            if charge:
+                logging.warning(charge.id)
 
     context = {
         'product': product,

@@ -106,3 +106,4 @@ class UserProfile(models.Model):
     zipcode = models.CharField(max_length=15, null=True, blank=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     remote_customer_id = models.CharField(max_length=255, null=True, blank=True, default='')
+    remote_receiver_id = models.CharField(max_length=255, null=True, blank=True, default='')
