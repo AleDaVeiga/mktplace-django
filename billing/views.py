@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from billing.models import Order
 from billing.forms import PaymentForm
@@ -52,8 +53,34 @@ def payment(request, product_id):
 def payment_order(request, order_id):
     order = get_object_or_404(Order, pk=order_id)
 
+    if order.user != request.user:
+        return redirect('home')
+
     context = {
         'order': order
     }
 
-    return render(request, 'billing/payment_success.html', context)
+    return render(request, 'billing/payment_order.html', context)
+
+
+@login_required
+def list_orders(request):
+
+    orders = Order.objects.filter(user=request.user)
+
+    paginator = Paginator(orders, 15)
+    page = request.GET.get('page', 1)
+
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+    context = {
+        'orders': orders
+    }
+
+    return render(request, 'billing/list_orders.html', context)
+

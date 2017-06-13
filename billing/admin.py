@@ -8,7 +8,7 @@ from billing.models import Order
 
 class OrderAdmin(AjaxSelectAdmin):
     list_filter = ['status', 'created_at']
-    list_display = ('user', 'merchant', 'commission', 'total', 'status')
+    list_display = ('id', 'user', 'merchant', 'commission', 'total', 'status')
     form = make_ajax_form(Order, {
         'user': 'user',
     })
