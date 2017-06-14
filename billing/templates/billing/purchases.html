@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Compra - Market Place{% endblock %}
+
+{% block content %}
+    <section class="section-content">
+        <div class="container">
+            <h3>Minhas Compras</h3>
+            <br>
+
+            {% if orders %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th># ID</th>
+                    <th>Produto</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td scope="row">{{ order.id }}</td>
+                        <td>{{ order.get_product.name|truncatechars:50 }}</td>
+                        <td>{{ order.total }}</td>
+                        <td>
+                            {% if order.order_status == 'Approved' %}
+                                Aprovado
+                            {% elif order.order_status == 'Pending' %}
+
+                            {% elif order.order_status == 'Pending' %}
+                                Pendente
+                            {% else %}
+                                Reprovado
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'item_purchase' order.id %}" title="Ordem {{ order.id }}">Visualizar</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if orders.has_previous %}
+                        <a href="?page={{ orders.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a>
+                    {% endif %}
+
+                    <span class="current">
+                        Página {{ orders.number }} de {{ orders.paginator.num_pages }}
+                    </span>
+
+                    {% if orders.has_next %}
+                        <a href="?page={{ orders.next_page_number }}"><span aria-hidden="true">&raquo;</span></a>
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+
+        <p>Sem ordens no momento</p>
+
+        {% endif %}
+
+        </div>
+    </section>
+
+{% endblock %}

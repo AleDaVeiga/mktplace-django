@@ -50,21 +50,7 @@ def payment(request, product_id):
 
 
 @login_required
-def payment_order(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
-
-    if order.user != request.user:
-        return redirect('home')
-
-    context = {
-        'order': order
-    }
-
-    return render(request, 'billing/payment_order.html', context)
-
-
-@login_required
-def list_orders(request):
+def purchases(request):
 
     orders = Order.objects.filter(user=request.user)
 
@@ -82,5 +68,40 @@ def list_orders(request):
         'orders': orders
     }
 
-    return render(request, 'billing/list_orders.html', context)
+    return render(request, 'billing/purchases.html', context)
 
+
+@login_required
+def item_purchase(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+
+    if order.user != request.user:
+        return redirect('home')
+
+    context = {
+        'order': order
+    }
+
+    return render(request, 'billing/item_purchase.html', context)
+
+
+@login_required
+def sales(request):
+
+    orders = Order.objects.filter(merchant=request.user, status='Approved')
+
+    paginator = Paginator(orders, 15)
+    page = request.GET.get('page', 1)
+
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+    context = {
+        'orders': orders
+    }
+
+    return render(request, 'billing/sales.html', context)

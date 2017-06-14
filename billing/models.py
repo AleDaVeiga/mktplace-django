@@ -16,6 +16,13 @@ class Order(models.Model):
         ('Approved', 'Approved'),
     )
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Inactive")
+    ORDER_STATUS_CHOICES = (
+        ('Received', 'Received'),
+        ('Packing', 'Packing'),
+        ('Posted', 'Posted'),
+        ('Delivered', 'Delivered'),
+    )
+    order_status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default="Received")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
