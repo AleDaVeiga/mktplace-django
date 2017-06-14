@@ -43,7 +43,7 @@ def payment(request, product_id):
             context['form'] = form
 
             order = BillingService().charge(user, product, card_data)
-            return redirect('billing_payment_order', order.id)
+            return redirect('item_purchase', order.id)
         return render(request, 'billing/payment.html', context)
 
     return render(request, 'billing/payment.html', context)

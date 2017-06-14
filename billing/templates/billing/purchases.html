@@ -15,7 +15,8 @@
                     <th># ID</th>
                     <th>Produto</th>
                     <th>Valor</th>
-                    <th>Status</th>
+                    <th>Status da Compra</th>
+                    <th>Status do produto</th>
                     <th>Ação</th>
                 </tr>
                 </thead>
@@ -24,7 +25,7 @@
                     <tr>
                         <td scope="row">{{ order.id }}</td>
                         <td>{{ order.get_product.name|truncatechars:50 }}</td>
-                        <td>{{ order.total }}</td>
+                        <td>R$ {{ order.total }}</td>
                         <td>
                             {% if order.order_status == 'Approved' %}
                                 Aprovado
@@ -36,6 +37,19 @@
                                 Reprovado
                             {% endif %}
                         </td>
+
+                        <td>
+                            {% if order.order_status == 'Received' %}
+                                <b><span class="text-success">Pedido Recebido</span></b>
+                            {% elif order.order_status == 'Packing' %}
+                                <b><span class="text-muted">Embalando</span></b>
+                            {% elif order.order_status == 'Posted' %}
+                                <b><span class="text-warning">Postado</span></b>
+                            {% else %}
+                                <b><span class="text-danger">Entregue</span></b>
+                            {% endif %}
+                        </td>
+
                         <td><a href="{% url 'item_purchase' order.id %}" title="Ordem {{ order.id }}">Visualizar</a></td>
                     </tr>
                 {% endfor %}
@@ -59,7 +73,7 @@
             </div>
         {% else %}
 
-        <p>Sem ordens no momento</p>
+        <p>Sem Compras até momento</p>
 
         {% endif %}
 

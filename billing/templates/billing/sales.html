@@ -47,7 +47,13 @@
                                 <b><span class="text-danger">Entregue</span></b>
                             {% endif %}
                         </td>
-                        <td><a href="{% url 'item_sold' order.id %}" title="Ordem {{ order.id }}">Editar Status</a></td>
+
+                        {# remove o link de edição caso o produto esteja entregue #}
+                        {% if order.order_status != 'Delivered' %}
+                            <td><a href="{% url 'item_sold' order.id %}" title="Ordem {{ order.id }}">Editar Status</a></td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -70,7 +76,7 @@
             </div>
         {% else %}
 
-        <p>Sem ordens no momento</p>
+        <p>Sem vendas até o momento</p>
 
         {% endif %}
 
