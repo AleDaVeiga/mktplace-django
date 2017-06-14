@@ -1,4 +1,5 @@
 from django import forms
+from billing.models import Order
 
 
 class PaymentForm(forms.Form):
@@ -40,19 +41,34 @@ class PaymentForm(forms.Form):
                              )
 
     month = forms.ChoiceField(label='Vencimento',
-                                      required=True,
-                                      widget=forms.Select(attrs={'class': 'form-control'}),
-                                      choices=MONTH_CHOICES
-                                      )
+                              required=True,
+                              widget=forms.Select(attrs={'class': 'form-control'}),
+                              choices=MONTH_CHOICES
+                              )
 
     year = forms.ChoiceField(label='Ano',
-                                     required=True,
-                                     widget=forms.Select(attrs={'class': 'form-control'}),
-                                     choices=YEAR_CHOICES
-                                     )
+                             required=True,
+                             widget=forms.Select(attrs={'class': 'form-control'}),
+                             choices=YEAR_CHOICES
+                             )
 
     verification_value = forms.CharField(label='Cód.Segurança',
                                          max_length=3,
                                          required=True,
                                          widget=forms.TextInput(attrs={'class': 'form-control'})
                                          )
+
+
+class EditOrderForm(forms.ModelForm):
+
+    class Meta:
+        model = Order
+        exclude = ('user', 'merchant', 'commission', 'product', 'total', 'status', 'created_at')
+
+        widgets = {
+            'order_status': forms.Select(attrs={'class': 'form-control', 'onchange': 'this.form.submit();'}),
+        }
+
+        labels = {
+            'order_status': "Status do produto",
+        }

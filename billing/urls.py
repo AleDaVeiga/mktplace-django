@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^purchases$', views.purchases, name='purchases'),
 
     # vendas
-    # url(r'^sale/(?P<order_id>[\d]+)\/?$', views.item_sold, name='item_sold'),
+    url(r'^sale/(?P<order_id>[\d]+)\/?$', views.item_sold, name='item_sold'),
     url(r'^sales$', views.sales, name='sales'),
 ]

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from billing.models import Order
-from billing.forms import PaymentForm
+from billing.forms import PaymentForm, EditOrderForm
 from billing.services import BillingService
 
 from portal.models import Product
@@ -105,3 +105,27 @@ def sales(request):
     }
 
     return render(request, 'billing/sales.html', context)
+
+
+@login_required
+def item_sold(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+
+    if order.user != request.user:
+        return redirect('home')
+    form = EditOrderForm(instance=order)
+
+    if request.method == 'POST':
+        form = EditOrderForm(request.POST)
+        if form.is_valid():
+            order.order_status = form.cleaned_data['order_status']
+            order.save()
+
+            return redirect('sales')
+
+    context = {
+        'form': form,
+        'order': order
+    }
+
+    return render(request, 'billing/item_sold.html', context)

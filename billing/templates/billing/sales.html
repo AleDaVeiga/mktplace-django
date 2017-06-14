@@ -5,7 +5,7 @@
 {% block content %}
     <section class="section-content">
         <div class="container">
-            <h3>Minhas Compras</h3>
+            <h3>Minhas Vendas</h3>
             <br>
 
             {% if orders %}
@@ -40,14 +40,14 @@
                             {% if order.order_status == 'Received' %}
                                 <b><span class="text-success">Recebido</span></b>
                             {% elif order.order_status == 'Packing' %}
-                                <b><span class="text-mutedr">Embalando</span></b>
+                                <b><span class="text-muted">Embalando</span></b>
                             {% elif order.order_status == 'Posted' %}
                                 <b><span class="text-warning">Postado</span></b>
                             {% else %}
                                 <b><span class="text-danger">Entregue</span></b>
                             {% endif %}
                         </td>
-                        <td><a href="{% url 'item_purchase' order.id %}" title="Ordem {{ order.id }}">Editar Status</a></td>
+                        <td><a href="{% url 'item_sold' order.id %}" title="Ordem {{ order.id }}">Editar Status</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
